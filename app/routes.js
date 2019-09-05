@@ -1,4 +1,5 @@
 // app/routes.js
+var tourModule = require("../app/models/tours");
 var userModule = require("../app/models/user");
 
 module.exports = function(app, passport) {
@@ -28,7 +29,6 @@ module.exports = function(app, passport) {
       wrongEmail: false
     });
   });
-
   // process the login form
   app.post(
     "/login",
@@ -95,6 +95,13 @@ module.exports = function(app, passport) {
   app.get("/packages/:package_id", (req, res) => {
     let package_id = req.params.package_id;
     res.send("You selected package id: " + package_id);
+  });
+  // =====================================
+  // ALL TOURS ===========================
+  // =====================================
+  app.get("/tours", (req, res) => {
+    let tours = tourModule.getAllTours();
+    res.send(tours.toString());
   });
 };
 

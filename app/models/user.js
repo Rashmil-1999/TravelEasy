@@ -2,7 +2,8 @@
 // load the things we need
 //var bcrypt   = require('bcrypt-nodejs');
 // define the schema for our user model
-var mysql = require("mysql");
+// var mysql = require("mysql");
+var conn = require("./mysqlConn");
 var passport = require("passport");
 
 var user = {
@@ -13,17 +14,10 @@ var user = {
   password: ""
 };
 
-var connection = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "root",
-  password: "Robinhoody1",
-  database: "tours"
-});
-
 // checking if password is valid
 user.validateUserNameAndPassword = function(email, password, done) {
   try {
-    connection.query(
+    conn.query(
       'SELECT * FROM tours.users WHERE email_id="' +
         email +
         '"AND password="' +
@@ -67,7 +61,7 @@ user.validateUserNameAndPassword = function(email, password, done) {
 // 1 - try / catch doesn't work with async codes, so you don't need to use
 // 2 - You need to add a callback to be trigered when everything had run
 user.createNewUser = function(user, callback) {
-  connection.query(
+  conn.query(
     'INSERT INTO tours.users (email_id, fname, lname, password) VALUES ("' +
       user.email_id +
       '", "' +

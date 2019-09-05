@@ -1,3 +1,4 @@
+CREATE DATABASE tours;
 USE tours;
 
 CREATE TABLE users(
@@ -71,9 +72,16 @@ CREATE TABLE transactions(
     transaction_date DATE NOT NULL,
     FOREIGN KEY (u_id)
 		REFERENCES users(id)
-        ON CASCADE DELETE,
-	FOREIGN KEY (t_id)
+        ON DELETE CASCADE,
+		FOREIGN KEY (t_id)
 		REFERENCES tour(t_id)
-        ON CASCADE RESTRICT,
-    PRIMARY KEY (tr_id),
-);
+        ON DELETE RESTRICT,
+    PRIMARY KEY (tr_id)
+)ENGINE=INNODB;
+
+
+SELECT pl.name
+FROM tour_places tp
+JOIN places pl
+	ON pl.pl_id = tp.pl_id
+WHERE tp.t_id = 1
