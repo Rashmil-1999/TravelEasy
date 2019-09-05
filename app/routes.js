@@ -7,7 +7,7 @@ module.exports = function(app, passport) {
   // HOME PAGE (with login links) ========
   // =====================================
   app.get("/", (req, res) => {
-    res.render("landing", { name: "" });
+    res.render("landing", { user: req.user });
   });
   // =====================================
   // ABOUT ===============================
@@ -20,7 +20,7 @@ module.exports = function(app, passport) {
   // LOGIN ===============================
   // =====================================
   // show the login form
-  app.get("/login", function(req, res) {
+  app.get("/login", isNotLoggedIn, function(req, res) {
     // render the page and pass in any flash data if it exists
     res.render("login", {
       message: req.flash("loginMessage"),
@@ -40,12 +40,11 @@ module.exports = function(app, passport) {
   );
 
   // =====================================
-  // PROFILE SECTION =========================
+  // PROFILE SECTION =====================
   // =====================================
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
   app.get("/profile", isLoggedIn, function(req, res) {
-    console.log(req);
     res.render("profile", {
       user: req.user // get the user out of session and pass to template
     });
@@ -61,6 +60,10 @@ module.exports = function(app, passport) {
     });
   });
 
+  // =====================================
+  // REGISTER ============================
+  // =====================================
+
   app.post("/register", function(req, res) {
     var user = req.body.user;
     console.log(user);
@@ -72,9 +75,26 @@ module.exports = function(app, passport) {
           console.error(err);
         }
 
-        res.redirect("/login?failed=false");
+        res.redirect("/");
       });
     }
+  });
+
+  // =====================================
+  // PACKAGES ============================
+  // =====================================
+  // return the package search page where the search can
+  app.get("/packages", (req, res) => {
+    res.send("this  is package search page! Coming SOOOOON!");
+  });
+
+  // =====================================
+  // PACKAGE DETAIL ======================
+  // =====================================
+  //load the details of the clicked package
+  app.get("/packages/:package_id", (req, res) => {
+    let package_id = req.params.package_id;
+    res.send("You selected package id: " + package_id);
   });
 };
 
@@ -84,6 +104,12 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next();
   // if they aren't redirect them to the home page
   else res.redirect("/login");
+}
+function isNotLoggedIn(req, res, next) {
+  // if user is authenticated in the session, carry on
+  if (!req.isAuthenticated()) return next();
+  // if they aren't redirect them to the home page
+  else res.redirect("/");
 }
 
 function hasNull(target) {

@@ -1,7 +1,6 @@
 // app/models/user.js
 // load the things we need
 //var bcrypt   = require('bcrypt-nodejs');
-var http = require("http");
 // define the schema for our user model
 var mysql = require("mysql");
 var passport = require("passport");
@@ -69,7 +68,7 @@ user.validateUserNameAndPassword = function(email, password, done) {
 // 2 - You need to add a callback to be trigered when everything had run
 user.createNewUser = function(user, callback) {
   connection.query(
-    'INSERT INTO tours.users (email, first_name, last_name, password) VALUES ("' +
+    'INSERT INTO tours.users (email_id, fname, lname, password) VALUES ("' +
       user.email_id +
       '", "' +
       user.fname +

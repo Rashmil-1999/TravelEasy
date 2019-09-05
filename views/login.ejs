@@ -52,6 +52,31 @@
                 </form>
             </div>
             <div class="card-footer text-center">
+                <form action="/register" method="post" autocomplete="off">
+                    <div class="input" id="register">
+                        <div class="blockinput">
+                            <i class="icon-envelope-alt"></i><input type="mail" placeholder="Email"
+                                name="user[email_id]" value="">
+                        </div>
+                        <div class="blockinput">
+                            <i class="icon-user"></i><input type="text" placeholder="Fist Name" name="user[fname]"
+                                value="">
+                        </div>
+                        <div class="blockinput">
+                            <i class="icon-user"></i><input type="text" placeholder="Last Name" name="user[lname]"
+                                value="">
+                        </div>
+                        <div class="blockinput">
+                            <i class="icon-unlock"></i><input type="password" placeholder="Password"
+                                name="user[password]" value="">
+                        </div>
+                        <div class="blockinput">
+                            <i class="icon-unlock"></i><input type="password" placeholder="Repeat Password"
+                                name="user[repeat_password]" value="">
+                        </div>
+                    </div>
+                    <button>Register</button>
+                </form>
                 <a style="text-decoration: none" href="/">Home</a>
             </div>
         </div>
