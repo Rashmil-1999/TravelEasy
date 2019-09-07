@@ -8,12 +8,13 @@ var flash = require("connect-flash");
 var bodyParser = require("body-parser");
 // var cookieParser = require("cookie-parser");
 var session = require("express-session");
-// var logger = require("logger").createLogger();;
+var logger = require("morgan");
 // var utils = require("./utils");
 
 require("./config/passport")(passport); // pass passport for configuration
 
 // set up our express application
+app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.set("view engine", "ejs"); // set up ejs for templating
 app.use(express.static("public"));

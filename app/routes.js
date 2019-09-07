@@ -38,7 +38,6 @@ module.exports = function(app, passport) {
       failureFlash: true // allow flash messages
     })
   );
-
   // =====================================
   // PROFILE SECTION =====================
   // =====================================
@@ -49,21 +48,17 @@ module.exports = function(app, passport) {
       user: req.user // get the user out of session and pass to template
     });
   });
-
   // =====================================
   // LOGOUT ==============================
   // =====================================
-
   app.get("/logout", function(req, res) {
     req.session.destroy(function(err) {
       res.redirect("/login"); //Inside a callback… bulletproof!
     });
   });
-
   // =====================================
   // REGISTER ============================
   // =====================================
-
   app.post("/register", function(req, res) {
     var user = req.body.user;
     console.log(user);
@@ -74,12 +69,10 @@ module.exports = function(app, passport) {
           res.redirect(500, "/internal_error");
           console.error(err);
         }
-
         res.redirect("/");
       });
     }
   });
-
   // =====================================
   // PACKAGES ============================
   // =====================================
@@ -99,9 +92,10 @@ module.exports = function(app, passport) {
   // =====================================
   // ALL TOURS ===========================
   // =====================================
-  app.get("/tours", (req, res) => {
-    let tours = tourModule.getAllTours();
-    res.send(tours.toString());
+  app.get("/tours", async (req, res) => {
+    let tours = await tourModule.getAllTours();
+    console.log("from handler: " + tours);
+    res.send(tours);
   });
 };
 

@@ -2,7 +2,7 @@ CREATE DATABASE tours;
 USE tours;
 
 CREATE TABLE users(
-	id INT NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT,
     fname VARCHAR(30) NOT NULL,
     lname VARCHAR(30) NOT NULL,
     email_id VARCHAR(50) NOT NULL,
@@ -48,20 +48,26 @@ CREATE TABLE tour_places(
 
 CREATE TABLE images(
 	i_id INT NOT NULL AUTO_INCREMENT,
+    t_id INT NOT NULL,
 	pl_id INT NOT NULL,
     image BLOB NOT NULL,
     FOREIGN KEY (pl_id)
 		REFERENCES places(pl_id)
         ON DELETE CASCADE,
+	FOREIGN KEY (t_id)
+		REFERENCES tour(t_id)
+        ON DELETE CASCADE,
 	PRIMARY KEY (i_id)
 )ENGINE=INNODB;
 
 CREATE TABLE dates(
+	dt_id INT NOT NULL AUTO_INCREMENT,
 	t_id INT NOT NULL,
     start_date DATE NOT NULL,
     FOREIGN KEY (t_id)
 		REFERENCES tour(t_id)
-		ON DELETE CASCADE
+		ON DELETE CASCADE,
+	PRIMARY KEY (dt_id)
 )ENGINE=INNODB;
 
 CREATE TABLE transactions(
