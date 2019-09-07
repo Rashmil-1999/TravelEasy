@@ -8,14 +8,16 @@ module.exports = function(app, passport) {
   // HOME PAGE (with login links) ========
   // =====================================
   app.get("/", (req, res) => {
-    res.render("landing", { user: req.user });
+    let attributes = { home: "nav-item active", about: "nav-item" };
+    res.render("landing", { user: req.user, attributes: attributes });
   });
   // =====================================
   // ABOUT ===============================
   // =====================================
   // show the about page
   app.get("/about", (req, res) => {
-    res.render("about");
+    let attributes = { home: "nav-item active", about: "nav-item" };
+    res.render("about", { user: req.user, attributes: attributes });
   });
   // =====================================
   // LOGIN ===============================
@@ -61,6 +63,7 @@ module.exports = function(app, passport) {
   // =====================================
   app.post("/register", function(req, res) {
     var user = req.body.user;
+    user.is_admin = 0;
     console.log(user);
     if (hasNull(user)) res.redirect("/login#registration?failed=true");
     else {
@@ -69,25 +72,32 @@ module.exports = function(app, passport) {
           res.redirect(500, "/internal_error");
           console.error(err);
         }
-        res.redirect("/");
+        res.redirect("/login");
       });
     }
   });
   // =====================================
-  // PACKAGES ============================
+  // CREATE TOUR =========================
   // =====================================
   // return the package search page where the search can
-  app.get("/packages", (req, res) => {
-    res.send("this  is package search page! Coming SOOOOON!");
+  app.post("/create-tour", isAdmin, async (req, res) => {
+    await tourModule.createTour(req.body.tour, error => {
+      if (err) {
+        res.redirect(500, "/internal_error");
+        console.error(err);
+      }
+    });
+    res.redirect("/tours");
   });
 
   // =====================================
   // PACKAGE DETAIL ======================
   // =====================================
   //load the details of the clicked package
-  app.get("/packages/:package_id", (req, res) => {
-    let package_id = req.params.package_id;
-    res.send("You selected package id: " + package_id);
+  app.get("/tours/:tour_id", async (req, res) => {
+    let tour = await tourModule.getTour(req.params.tour_id);
+    console.log(tour[0]);
+    res.send("You selected package id: " + package_id + "\n" + tour[0]);
   });
   // =====================================
   // ALL TOURS ===========================
@@ -95,8 +105,16 @@ module.exports = function(app, passport) {
   app.get("/tours", async (req, res) => {
     let tours = await tourModule.getAllTours();
     console.log("from handler: " + tours);
-    res.send(tours);
+    res.send(tours[0].images[0]);
   });
+};
+
+// route middleware for checking if the current user is admin or not
+const isAdmin = (req, res, next) => {
+  // if user is admin then carry on
+  if (req.user.is_admin === 1) return next();
+  // if the aren't then redirect to customer-login
+  else res.redirect("/login");
 };
 
 // route middleware to make sure

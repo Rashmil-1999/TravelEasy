@@ -11,7 +11,8 @@ var user = {
   fname: "",
   lname: "",
   email_id: "",
-  password: ""
+  password: "",
+  is_admin: ""
 };
 
 // checking if password is valid
@@ -62,7 +63,7 @@ user.validateUserNameAndPassword = function(email, password, done) {
 // 2 - You need to add a callback to be trigered when everything had run
 user.createNewUser = function(user, callback) {
   conn.query(
-    'INSERT INTO tours.users (email_id, fname, lname, password) VALUES ("' +
+    'INSERT INTO tours.users (email_id, fname, lname, password, is_admin) VALUES ("' +
       user.email_id +
       '", "' +
       user.fname +
@@ -70,7 +71,9 @@ user.createNewUser = function(user, callback) {
       user.lname +
       '", "' +
       user.password +
-      '")',
+      '",' +
+      user.is_admin +
+      ")",
     function(err, result) {
       // We will pass the error and the result to the function
       callback(err, result);

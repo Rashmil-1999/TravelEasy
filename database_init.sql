@@ -7,6 +7,7 @@ CREATE TABLE users(
     lname VARCHAR(30) NOT NULL,
     email_id VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
+    is_admin INT NOT NULL,
     PRIMARY KEY(id))ENGINE=INNODB;
     
 CREATE TABLE tour_type(
