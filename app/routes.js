@@ -1,9 +1,9 @@
 // app/routes.js
 var tourModule = require("../app/models/tours");
 var userModule = require("../app/models/user");
+var utils = require("../utils");
 
 module.exports = function(app, passport) {
-  //var http   = require('http');
   // =====================================
   // HOME PAGE (with login links) ========
   // =====================================
@@ -65,7 +65,7 @@ module.exports = function(app, passport) {
     var user = req.body.user;
     user.is_admin = 0;
     console.log(user);
-    if (hasNull(user)) res.redirect("/login#registration?failed=true");
+    if (hasNull(user)) res.redirect("/login");
     else {
       userModule.createNewUser(user, function(err) {
         if (err) {
@@ -77,19 +77,63 @@ module.exports = function(app, passport) {
     }
   });
   // =====================================
-  // CREATE TOUR =========================
+  // CREATE TOUR GET======================
+  // =====================================
+  app.get("/admin/create-tour", isLoggedIn, isAdmin, async (req, res) => {
+    let tour_types = await tourModule.getAllTourTypes();
+    let tour_places = await tourModule.getAllPlaces();
+    res.render("create-tour", {
+      tour_types: tour_types,
+      tour_places: tour_places
+    });
+  });
+  // =====================================
+  // CREATE TOUR POST=====================
   // =====================================
   // return the package search page where the search can
   app.post("/create-tour", isAdmin, async (req, res) => {
-    await tourModule.createTour(req.body.tour, error => {
-      if (err) {
-        res.redirect(500, "/internal_error");
-        console.error(err);
-      }
-    });
-    res.redirect("/tours");
-  });
+    // add files to the tour object
+    // console.log("this");
+    let tourData = {};
+    let dates = req.body.dates.split(",");
+    let places = req.body.places;
 
+    tourData.tour = req.body.tour;
+    tourData.tour.tt_id = parseInt(tourData.tour.tt_id, 10);
+    tourData.dates = utils.getReversedDates(dates);
+    tourData.places = utils.convertToInt(places);
+    // console.log(tourData);
+    await tourModule.createTour(tourData);
+    res.redirect("/create-tour");
+  });
+  // =====================================
+  // CREATE PLACE POST====================
+  // =====================================
+  app.post("/create-place", isAdmin, async (req, res) => {
+    // add files to the tour object
+    let image = req.files.image;
+    image.mv(`C:/programming/WD/public/IMAGEUPLOADS/${image.name}`);
+    let place = {};
+    place.name = req.body.place_name;
+    place.image_path = `/IMAGEUPLOADS/${image.name}`;
+    await tourModule.createPlace(place);
+    res.redirect("/create-tour");
+  });
+  // =====================================
+  // CREATE TOUR TYPE=====================
+  // =====================================
+  app.post("/create-tour_type", isAdmin, async (req, res) => {
+    await tourModule.createNewTourType(req.body.type);
+    res.redirect("/create-tour");
+  });
+  // =====================================
+  // ALL TOURS ===========================
+  // =====================================
+  app.get("/admin/tours", isAdmin, async (req, res) => {
+    let tours = await tourModule.getAllTours();
+    console.log("from handler: " + tours);
+    res.send(tours);
+  });
   // =====================================
   // PACKAGE DETAIL ======================
   // =====================================
@@ -99,13 +143,27 @@ module.exports = function(app, passport) {
     console.log(tour[0]);
     res.send("You selected package id: " + package_id + "\n" + tour[0]);
   });
-  // =====================================
-  // ALL TOURS ===========================
-  // =====================================
-  app.get("/tours", async (req, res) => {
-    let tours = await tourModule.getAllTours();
-    console.log("from handler: " + tours);
-    res.send(tours[0].images[0]);
+
+  app.get("/test", async (req, res) => {
+    console.log(await tourModule.getAllPlaces());
+    console.log(await tourModule.getAllTourTypes());
+
+    const tourData = {
+      tour: {
+        name: "Goa",
+        region: "goa",
+        duration: "4N GOA",
+        description:
+          "4 Nights Goa: park regis/Adamo the bells/The acacia hotel/Citrus hotel/Whispering palms resort",
+        itenary: "day1: day2: day3:",
+        price: "2312423",
+        tt_id: 2
+      },
+      places: [1],
+      dates: ["2019-11-04", "2020-01-04", "2020-02-04"]
+    };
+    await tourModule.createTour(tourData);
+    res.send("success");
   });
 };
 
@@ -124,16 +182,16 @@ function isLoggedIn(req, res, next) {
   // if they aren't redirect them to the home page
   else res.redirect("/login");
 }
+//route middleware to make sure
 function isNotLoggedIn(req, res, next) {
-  // if user is authenticated in the session, carry on
+  // if user is not authenticated in the session, carry on
   if (!req.isAuthenticated()) return next();
-  // if they aren't redirect them to the home page
+  // if they are redirect them to the home page
   else res.redirect("/");
 }
-
 function hasNull(target) {
   for (var member in target) {
-    if (target[member] == null || target[member] == "") return true;
+    if (target[member] === null || target[member] === "") return true;
   }
   return false;
 }

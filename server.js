@@ -9,11 +9,18 @@ var bodyParser = require("body-parser");
 // var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var logger = require("morgan");
+var fileUpload = require("express-fileupload");
 // var utils = require("./utils");
 
 require("./config/passport")(passport); // pass passport for configuration
 
 // set up our express application
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/"
+  })
+);
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 app.set("view engine", "ejs"); // set up ejs for templating
