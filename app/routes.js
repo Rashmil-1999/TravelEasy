@@ -84,14 +84,15 @@ module.exports = function(app, passport) {
     let tour_places = await tourModule.getAllPlaces();
     res.render("create-tour", {
       tour_types: tour_types,
-      tour_places: tour_places
+      tour_places: tour_places,
+      placeExists: false
     });
   });
   // =====================================
   // CREATE TOUR POST=====================
   // =====================================
   // return the package search page where the search can
-  app.post("/create-tour", isAdmin, async (req, res) => {
+  app.post("/create-tour", isLoggedIn, isAdmin, async (req, res) => {
     // add files to the tour object
     // console.log("this");
     let tourData = {};
@@ -109,27 +110,44 @@ module.exports = function(app, passport) {
   // =====================================
   // CREATE PLACE POST====================
   // =====================================
-  app.post("/create-place", isAdmin, async (req, res) => {
+  app.post("/create-place", isLoggedIn, isAdmin, async (req, res) => {
     // add files to the tour object
+    let i = 0;
     let image = req.files.image;
-    image.mv(`C:/programming/WD/public/IMAGEUPLOADS/${image.name}`);
     let place = {};
     place.name = req.body.place_name;
     place.image_path = `/IMAGEUPLOADS/${image.name}`;
-    await tourModule.createPlace(place);
+    let allPlaces = await tourModule.getAllPlaces();
+    for (i = 0; i < allPlaces.length; i++) {
+      if (place.name === allPlaces[i].name) {
+        break;
+      }
+    }
+    if (i === allPlaces.length) {
+      image.mv(`C:/programming/WD/public/IMAGEUPLOADS/${image.name}`);
+      await tourModule.createPlace(place);
+    } else {
+      let tour_types = await tourModule.getAllTourTypes();
+      let tour_places = await tourModule.getAllPlaces();
+      res.render("create-tour.ejs", {
+        tour_types: tour_types,
+        tour_places: tour_places,
+        placeExists: true
+      });
+    }
     res.redirect("/create-tour");
   });
   // =====================================
   // CREATE TOUR TYPE=====================
   // =====================================
-  app.post("/create-tour_type", isAdmin, async (req, res) => {
+  app.post("/create-tour_type", isLoggedIn, isAdmin, async (req, res) => {
     await tourModule.createNewTourType(req.body.type);
     res.redirect("/create-tour");
   });
   // =====================================
   // ALL TOURS ===========================
   // =====================================
-  app.get("/admin/tours", isAdmin, async (req, res) => {
+  app.get("/admin/tours", isLoggedIn, isAdmin, async (req, res) => {
     let tours = await tourModule.getAllTours();
     console.log("from handler: " + tours);
     res.send(tours);
@@ -143,6 +161,10 @@ module.exports = function(app, passport) {
     console.log(tour[0]);
     res.send("You selected package id: " + package_id + "\n" + tour[0]);
   });
+  // =====================================
+  // SEARCH ==============================
+  // =====================================
+  app.post("/search", async (req, res) => {});
 
   app.get("/test", async (req, res) => {
     console.log(await tourModule.getAllPlaces());
