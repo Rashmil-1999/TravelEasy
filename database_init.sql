@@ -75,9 +75,3 @@ CREATE TABLE transactions(
     PRIMARY KEY (tr_id)
 )ENGINE=INNODB;
 
-
-SELECT pl.name
-FROM tour_places tp
-JOIN places pl
-	ON pl.pl_id = tp.pl_id
-WHERE tp.t_id = 1
