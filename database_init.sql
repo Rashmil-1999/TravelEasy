@@ -8,7 +8,8 @@ CREATE TABLE users(
     email_id VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     is_admin INT NOT NULL,
-    PRIMARY KEY(id))ENGINE=INNODB;
+    PRIMARY KEY(id)
+)ENGINE=INNODB;
     
 CREATE TABLE tour_type(
 	tt_id INT NOT NULL AUTO_INCREMENT,
@@ -20,7 +21,7 @@ CREATE TABLE tour(
 	t_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(60) NOT NULL,
     region VARCHAR(50) NOT NULL,
-    duration VARCHAR(20) NOT NULL,
+    duration VARCHAR(50) NOT NULL,
     description VARCHAR(500) NOT NULL,
     itenary MEDIUMTEXT NOT NULL,
     price VARCHAR(100) NOT NULL,
