@@ -20,6 +20,7 @@ module.exports = function(app) {
     res.send(results);
   });
 
+  // testing endpoint (remove it at the end)
   app.get("/test", async (req, res) => {
     console.log(await tourModule.getAllPlaces());
     console.log(await tourModule.getAllTourTypes());

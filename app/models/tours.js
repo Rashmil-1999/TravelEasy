@@ -109,6 +109,17 @@ tour.createNewTourType = async tourType => {
   return insertResponse[0].insertId;
 };
 
+tour.search = async keyword => {
+  let searchResponse = await database.raw(`
+    SELECT tp.t_id
+    FROM places p
+    JOIN tour_places tp
+      ON p.pl_id = tp.pl_id
+    WHERE p.name LIKE '%${keyword}%';`);
+  let response = await getToursByGivenIds(searchResponse);
+  return response;
+};
+
 //create new date entry
 const newDateEntry = async (t_id, date) => {
   let query = `INSERT INTO dates (t_id,start_date) VALUES(${t_id},"${date}");`;
@@ -172,6 +183,36 @@ const getTours = async () => {
         ON t.tt_id = tp.tt_id`
   );
   return data[0];
+};
+
+// get all the tours by the id passed in the array
+const getToursByGivenIds = async idArray => {
+  if (idArray[0].length) {
+    let queryCondition = `\nWHERE t.t_id = ${idArray[0][0].t_id}`;
+    for (let i = 1; i < idArray[0].length; i++) {
+      queryCondition += ` OR t.t_id = ${idArray[0][i].t_id}`;
+    }
+    queryCondition += `;`;
+    let tourQuery = `SELECT 
+      t.t_id,
+      t.name,
+      t.region,
+      t.duration,
+      t.description,
+      t.itenary,
+      t.price,
+      tp.type
+    FROM tour t
+    JOIN tour_type tp
+      ON t.tt_id = tp.tt_id`;
+    let finalQuery = tourQuery + queryCondition;
+    // console.log(finalQuery);
+    let tours = await database.raw(finalQuery);
+    tours = await appendAdditionalData(tours[0]);
+    return tours;
+  } else {
+    return "No Results";
+  }
 };
 
 // utility function to get the places by tour id
