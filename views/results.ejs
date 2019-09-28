@@ -1,0 +1,68 @@
+<% include partials/header %>
+
+
+<title>Tours and travels</title>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Chal Jeevi leiye</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <% if(user){ %>
+                <li class="nav-item">
+                    <span class="navbar-text">
+                        Welcome!
+                        <%= user.fname %>
+                    </span>
+                </li>
+                <% } %>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <% if(!user){ %>
+                    <a class="nav-link" href="/login">Login</a>
+                    <% }else{ %>
+                    <a class="nav-link" href="/logout">Logout</a>
+                    <% } %>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search destinations..."
+                    aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<br>
+<br>
+<br>
+<br>
+<div class="container-fluid">
+    <h3>Your search results for: <strong><%= keyword %></strong></h3>
+</div>
+
+
+<div class="container">
+    <% for(var i = 0; i< results.length; i++){%>
+    <div class="card mb-3">
+        <img src="<%= results[i].places[0].image_path %>" class="card-img-top" alt="Image here">
+        <div class="card-body">
+            <h5 class="card-title"> <a href="<%= "/tours/" + results[i].t_id %>"><%= results[i].name %></a></h5>
+            <p class="card-text"><%= results[i].description %></p>
+            <p class="card-text"><small class="text-muted"><%= results[i].region %></small></p>
+        </div>
+    </div>
+    <% } %>
+</div>
+
+
+<% include partials/footer %>

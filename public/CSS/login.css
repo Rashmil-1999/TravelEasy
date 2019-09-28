@@ -53,3 +53,7 @@ body {
   color: #000;
   font-weight: bold;
 }
+
+.round-button {
+  border-radius: 8px;
+}

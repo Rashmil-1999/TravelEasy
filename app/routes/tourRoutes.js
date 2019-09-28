@@ -9,7 +9,7 @@ module.exports = function(app) {
   app.get("/tours/:tour_id", async (req, res) => {
     let tour = await tourModule.getTour(req.params.tour_id);
     console.log(tour[0]);
-    res.send("You selected package id: " + package_id + "\n" + tour[0]);
+    res.send("You selected package id: " + req.params.tour_id + "\n" + tour[0]);
   });
   // =====================================
   // SEARCH ==============================
@@ -17,7 +17,11 @@ module.exports = function(app) {
   app.post("/search", async (req, res) => {
     let search = req.body.search;
     let results = await tourModule.search(search);
-    res.send(results);
+    res.render("results", {
+      results: results,
+      keyword: search,
+      user: req.user
+    });
   });
 
   // testing endpoint (remove it at the end)
