@@ -29,6 +29,14 @@ module.exports = function(app) {
     res.render("services", { user: req.params.user });
   });
 
+  app.get("/contact", (req, res) => {
+    res.render("contact", { user: req.params.user });
+  });
+
+  app.get("/landing", (req, res) => {
+    res.render("landing", { user: req.params.user });
+  });
+
   // testing endpoint (remove it at the end)
   app.get("/test", async (req, res) => {
     res.render("contact");

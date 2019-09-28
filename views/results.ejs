@@ -41,6 +41,7 @@
         </div>
     </nav>
 
+
 <br>
 <br>
 <br>
@@ -54,7 +55,7 @@
     <% if(results !== "No Results"){ %>
     <% for(var i = 0; i< results.length; i++){%>
     <div class="card mb-3">
-        <img src="<%= results[i].places[0].image_path %>" class="card-img-top" alt="Image here">
+        <img src="<%= results[i].places[0].image_path %>" class="card-img-top" alt="Image here" width="500" height="300">
         <div class="card-body">
             <h5 class="card-title"> <a href="<%= "/tours/" + results[i].t_id %>"><%= results[i].name %></a></h5>
             <p class="card-text"><%= results[i].description %></p>
