@@ -10,6 +10,7 @@ body {
   margin-right: 1200px;
   background-color: cadetblue;
   fill-opacity: 1;
+  border-style: 2px solid rgb(245, 245, 182);
 }
 
 .scroll {
