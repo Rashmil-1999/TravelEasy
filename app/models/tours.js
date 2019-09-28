@@ -115,7 +115,7 @@ tour.search = async keyword => {
     FROM places p
     JOIN tour_places tp
       ON p.pl_id = tp.pl_id
-    WHERE p.name LIKE '%${keyword}%';`);
+    WHERE p.name LIKE '${keyword}%';`);
   let response = await getToursByGivenIds(searchResponse);
   return response;
 };
