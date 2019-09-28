@@ -1,9 +1,9 @@
 let mysql = require("mysql");
 
 var mysqlConn = mysql.createConnection({
-  host: "127.0.0.1",
+  host: "localhost",
   user: "root",
-  password: "Robinhoody1",
+  password: "softy@123",
   database: "tours"
 });
 
