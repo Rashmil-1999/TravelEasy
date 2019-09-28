@@ -3,46 +3,48 @@
 
 <title>About</title>
 <link rel="stylesheet" href="CSS/about.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="/">TravelEasy</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <% if(user){ %>
-                <li class="nav-item">
-                    <span class="navbar-text">
-                        Welcome!
-                        <%= user.fname %>
-                    </span>
-                </li>
-                <% } %>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
-                    <% if(!user){ %>
-                    <a class="nav-link" href="/login">Login</a>
-                    <% }else{ %>
-                    <a class="nav-link" href="/logout">Logout</a>
+        <div class="container">
+            <a class="navbar-brand" href="/">TravelEasy</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <% if(user){ %>
+                    <li class="nav-item">
+                        <span class="navbar-text">
+                            Welcome!
+                            <%= user.fname %>
+                        </span>
+                    </li>
                     <% } %>
-                </li>
-            </ul>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <% if(!user){ %>
+                        <a class="nav-link" href="/login">Login</a>
+                        <% }else{ %>
+                        <a class="nav-link" href="/logout">Logout</a>
+                        <% } %>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+                    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search destinations..."
+                        aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
+
 <div style="height: 60px;"></div>
 <!-- About -->
 <div class="container">
@@ -63,38 +65,158 @@
             <img src="Media/all_travel.gif" alt="all travel" class="travel">
         </div>
     </div>
+    <br>
     <div class="row  justify-content-center">
         <div class="col">
             <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus dolores saepe voluptatum inventore
-                laudantium
-                maiores aut explicabo voluptates quae veniam, a aliquid perspiciatis unde id magnam recusandae, ea
-                rerum
-                nemo.
-                Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Ipsum laboriosam consequatur quam non, nisi enim
-                tempore,
-                mollitia labore, illum quae voluptatem similique autem laborum excepturi eligendi reiciendis
-                assumenda
-                reprehenderit
-                adipisci? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem enim culpa necessitatibus,
-                esse
-                suscipit
-                recusandae itaque? Accusamus porro assumenda eius, quasi nihil fugiat voluptatibus aspernatur
-                exercitationem!
-                Dicta,
-                labore eaque? Odio! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt ullam
-                inventore
-                vitae
-                sunt,
-                illum sit amet architecto excepturi dolorum ipsum consequuntur tenetur a tempora delectus fuga.
-                Laudantium
-                quidem
-                nulla repellendus.
+                    Nurtured from the seed of a single great idea - to empower the traveller - TravelEasy is a pioneer in India’s online travel industry.
+                    Founded in the year 2000 by Priyal Patel, Rashmil Panchani and Richa Sheth, TravelEasy came to life to empower the Indian traveller with instant bookings and comprehensive choices.<br><br>
+                    The company initiated its journey serving the US-India travel market offering a range of best-value products and services powered by technology and round-the-clock customer support.
+
+                    After consolidating its position in the market as a brand recognised for its reliability and transparency, TravelEasy launched its India operations in 2005.<br>
+                     With more and more Indians initiating to transact online with IRCTC and new opportunities with the advent of low cost carriers, TravelEasy offered travellers the convenience of booking travel online with a few clicks.
+                    
+                    TravelEasy’s rise has been led by the vision and the spirit of each one of its employees, for whom no idea was too big and no problem too difficult.<br>
+                     With untiring determination, TravelEasy has proactively diversified its product offering, adding a variety of online and offline products and services.
+                      TravelEasy has stayed ahead of the curve by continually evolving its technology to meet the ever-changing demands of the rapidly developing global travel market, steadily establishing itself as India’s leading online travel company.
             </p>
         </div>
     </div>
 </div>
+<br><br>
+
+<div class="container">
+        <div class="row">
+          <div class="col-xs-12 ">
+            <nav>
+              <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Awards</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Family promise</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">FAQ's</a>
+                
+              </div>
+            </nav>
+            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                
+                <ul>
+                    <li>The Best Family Group Tour Operator in Gujarat Supported by Gujarat Tourism 2017 </li>
+                    <li>Most Popular Brand 2017 by Artha sanket Maharashtra</li>
+                    <li>"India's Most Valuable Travel Destination Company 2017" at 8th Annual India Leadership Conclave & Indian Affairs Business Leadership Awards 2017</li>
+                    <li>Best Domestic Tour Operator by Today's Traveller Awards</li>
+                    <li>India's Top 100 Travel Producers award by OTM</li>
+                
+                </ul>
+
+              </div>
+              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    From Family To Famliy<br><br>
+                    Dear Guest,<br><br>
+                    
+                    Thank you for your continued support and the confidence that you have placed in us. As we build the foundation of success, we completely recognize the trust you place in us and with your continuous support, we assure to maintain our best-in-class service.<br><br>
+                    
+                    We are greatly humbled and honoured to be receiving the President of India Category-I Award by Shri Pranab Mukherjee for Tour Operator, Rest of India and National Tourism Awards 2013-14 Category-III for Outstanding Performance in Tourism Sector and Domestic Tour Operator - Jammu & Kashmir Region.<br><br>
+                    
+                    For TravelEasy Family, you are the centre of everything we do. Thus with every tour, we ensure working tirelessly to meet and outstrip your expectation in an enjoyable and responsible way.<br><br>
+                    
+                    Innovations are what TravelEasy loves Creating!!!<br>
+                    TravelEasy provides more than 50 group tour products for Europe, almost 50 products for South East Asia, exclusive special tours for ladies, students, senior citizens, and trips to exotic destinations for newlyweds. Besides, we follow a continuous research for new products, themes and a range of travel upgradations that helps us serve the best to our guests.<br><br>
+                    
+                    Whether it's a corporate tour, romantic delight, adventurous junkies or just a Chota Break , we have ample of tour choices to suit the most of your taste, requirement and budget. So Hurry up and book a Holiday with TravelEasy!<br><br>
+                    
+                    Yours Sincerely,<br><br>
+                    
+                    TravelEasy Family <br>
+              </div>
+              <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    Q1:What is generally the size of a tour group ?<br>
+                    ANS:Generally the number of guest traveling varies depending on the destination. The average group size for World Tour is between 40 to 47 and Indian tour is between 28 to 56. However, if a particular tour gets an overwhelming response or if it is a special tour like My Fair Lady or Second Innings tour then the group size may go beyond the aforesaid group size.<br>
+                    
+                  <br>Q2:Who would be my co-travelers ?<br>
+                   ANS : Your co-travelers can be any individual, right from a professional C.A or Doctor to a teacher, a teenager, an artist, a politician, businessman, people of any religion, from any region, any language etc. When you return from your dream holiday, we assure you that there will be additions to your friends list.<br>
+                    
+                  <br> Q3: Will it be possible to extend my stay at a destination ?<br>
+                    ANS: You can extend your stay provided you intimate us of such extension at the time of your booking. Additional charges will be applicable. No extensions/alterations can be done when the tour is in progress.<br>
+                    
+                   <br>Q4: Can I avail just a part of the tour?<br>
+                    ANS : It is not advisable to do tours partly as you wont be able to experience your dream destinations completely. Kesari offers you a wide range of products that suit your requirements. Our travel consultants will guide you on the same.<br>
+                    
+                   <br> Q5: Is the tour itinerary susceptible to last minute changes, as we need to plan our leaves & make necessary arrangements accordingly?<br>
+                    ANS: We do not change the itinerary nor date of the tour, however in case of force majeure events, circumstances force us to change the routing or date of the tour, as the case may be, just for your safety.<br>
+                    
+                    <br>Q6: Can I incorporate any changes in my travel plan once the booking is done?<br>
+                   ANS:  Yes, you can modify your booking or travel plan. There may be certain charges for modifications or for cancelling the old booking and making new arrangements. The travel consultants at our offices will assist you for the same.<br>
+                    
+                   <br> Q7: Is there any refund against cancellation?<br>
+                   ANS: Cancellation of tour will attract certain cancellation charges. The travel consultant will give you the details about such cancellation at the time of booking or for more information on cancellation charges.<br>
+                    
+                    <br>Q8: What are my options in the event that a tour receives less response ?<br>
+                    ANS: Generally, we operate all the tours that we launch, however in some cases the total number of bookings fall below our prescribed minimum operating capacity, in such cases we give you options and then accommodate or merge your tour with other available tours. You may also opt for our customized packages in such cases, but the services like group games, group activities, meals, tour leader etc may or may not be provided.<br>
+                    
+                   <br> Q9: Do you provide Leave Travel Certificate?<br>
+                    ANS: We do provide the leave travel certificate, subject to your intimation to us about your requirement at the time of booking the tour itself.<br>
+                    
+                   <br> Q10 :If I misplace my passport, what assistance will I be provided ?<br>
+                    ANS: Ideally only 1 Tour Leader is assigned to manage the group & since he has to follow the itinerary, the group may have to move ahead to the next destination while you may have to stay back at your current location - additional services will be on chargeable basis! Either we may be able to provide you with assistance - subject to availability & on chargeable basis only - who'll assist you with all the required & necessary formalities like lodging a complaint / FIR at the nearest police station & securing a Landing Certificate from the Indian Embassy of the respective international destination.<br>
+                    
+                   <br> Q11: What is an e-ticket?<br>
+                    ANS: An e-ticket is a paperless electronic document with a unique confirmation number that neatly replaces the hassles of a paper ticket. You may request for a copy to be sent to your e-mail id, in-case of International tours - if & when you require e-tickets for buying Forex, for VISA formalities. For outstation guests who have booked Domestic tours & may arrive at the airport before the scheduled time, we may issue an e-ticket copy if requested for - on a case to case basis, under such circumstances, you are requested to not make any changes in it at the airport as it is a group PNR & any changes may create problem for the entire group!<br>
+              </div>
+              <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+               
+              </div>
+            </div>
+          
+          </div>
+        </div>
+  </div>
+</div>
+</div>
+<br>
+
+<section id="footer">
+		<div class="container">
+			<div class="row text-center text-xs-center text-sm-left text-md-left">
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					<h5>Quick links</h5>
+					<ul class="list-unstyled quick-links">
+						<li><a href="/"><i class="fa fa-angle-double-right"></i>Home</a></li>
+						<li><a href="/about"><i class="fa fa-angle-double-right"></i>About</a></li>
+						<li><a href="/contact"><i class="fa fa-angle-double-right"></i>Contact us</a></li>
+						<li><a href="/services"><i class="fa fa-angle-double-right"></i>Privacy Policy</a></li>
+						
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-4">
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+					<ul class="list-unstyled list-inline social text-center">
+						<li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a></li>
+						<li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a></li>
+						<li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a></li>
+						<li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a></li>
+						<li class="list-inline-item"><a href="javascript:void();" target="_blank"><i class="fa fa-envelope"></i></a></li>
+					</ul>
+				</div>
+				</hr>
+			</div>	
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+					<p><u><a href="#">TravelEasy</a></u> is a Registered Website helping umpteen people explore India.</p>
+					<p class="h6"> All right Reversed.<a class="text-green ml-2" href="https://www.sunlimetech.com" target="_blank"></a></p>
+				</div>
+				</hr>
+			</div>	
+		</div>
+	</section>
+<br>
+
 <!-- Optional JavaScript -->
 
 <% include partials/footer %>
