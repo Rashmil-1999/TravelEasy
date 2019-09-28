@@ -75,7 +75,7 @@ user.createNewUser = function(user, callback) {
       user.is_admin +
       ")",
     function(err, result) {
-      console.log(result.insertId);
+      // console.log(result.insertId);
       // We will pass the error and the result to the function
       callback(err, result);
     }

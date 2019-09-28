@@ -17,6 +17,7 @@ module.exports = function(app) {
   app.post("/search", async (req, res) => {
     let search = req.body.search;
     let results = await tourModule.search(search);
+    console.log(results);
     res.render("results", {
       results: results,
       keyword: search,

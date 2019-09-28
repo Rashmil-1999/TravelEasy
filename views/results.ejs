@@ -52,6 +52,7 @@
 
 
 <div class="container">
+    <% if(results !== "No Results"){ %>
     <% for(var i = 0; i< results.length; i++){%>
     <div class="card mb-3">
         <img src="<%= results[i].places[0].image_path %>" class="card-img-top" alt="Image here">
@@ -61,6 +62,13 @@
             <p class="card-text"><small class="text-muted"><%= results[i].region %></small></p>
         </div>
     </div>
+    <% } %>
+    <% }else{ %>
+        <div class="card mb-3">
+            <div class="card-body text-center container">
+                <h2>No such tours! :(</h2>
+            </div>
+        </div>
     <% } %>
 </div>
 
