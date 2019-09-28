@@ -10,10 +10,11 @@ var bodyParser = require("body-parser");
 var session = require("express-session");
 var logger = require("morgan");
 var fileUpload = require("express-fileupload");
+var env = require("dotenv");
 // var utils = require("./utils");
 
 require("./config/passport")(passport); // pass passport for configuration
-
+env.config();
 // set up our express application
 app.use(
   fileUpload({
