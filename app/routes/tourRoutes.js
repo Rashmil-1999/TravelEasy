@@ -24,26 +24,12 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/services", (req, res) => {
+    res.render("services", { user: req.params.user });
+  });
+
   // testing endpoint (remove it at the end)
   app.get("/test", async (req, res) => {
-    console.log(await tourModule.getAllPlaces());
-    console.log(await tourModule.getAllTourTypes());
-
-    const tourData = {
-      tour: {
-        name: "Goa",
-        region: "goa",
-        duration: "4N GOA",
-        description:
-          "4 Nights Goa: park regis/Adamo the bells/The acacia hotel/Citrus hotel/Whispering palms resort",
-        itenary: "day1: day2: day3:",
-        price: "2312423",
-        tt_id: 2
-      },
-      places: [1],
-      dates: ["2019-11-04", "2020-01-04", "2020-02-04"]
-    };
-    await tourModule.createTour(tourData);
-    res.send("success");
+    res.render("contact");
   });
 };
