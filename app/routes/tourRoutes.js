@@ -39,6 +39,6 @@ module.exports = function(app) {
 
   // testing endpoint (remove it at the end)
   app.get("/test", async (req, res) => {
-    res.render("contact");
+    res.render("itinery");
   });
 };
