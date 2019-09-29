@@ -8,16 +8,17 @@ module.exports = function(app, passport) {
   // HOME PAGE (with login links) ========
   // =====================================
   app.get("/", (req, res) => {
-    let attributes = { home: "nav-item active", about: "nav-item" };
-    res.render("landing", { user: req.user, attributes: attributes });
+    res.render("landing", {
+      user: req.user,
+      nav_attributes: { active: "active" }
+    });
   });
   // =====================================
   // ABOUT ===============================
   // =====================================
   // show the about page
   app.get("/about", (req, res) => {
-    let attributes = { home: "nav-item active", about: "nav-item" };
-    res.render("about", { user: req.user, attributes: attributes });
+    res.render("about", { user: req.user, nav_attributes: { active: "" } });
   });
   // =====================================
   // LOGIN ===============================

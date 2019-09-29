@@ -8,3 +8,10 @@ module.exports.getReversedDates = dates => {
 module.exports.convertToInt = values => {
   return values.map(value => parseInt(value, 10));
 };
+
+module.exports.convertToArray = inputString => {
+  let convertedArr = inputString.trim().split("<:>");
+  return convertedArr.map(value => {
+    return value.trim();
+  });
+};

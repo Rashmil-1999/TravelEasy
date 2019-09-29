@@ -40,7 +40,7 @@ module.exports = function(app) {
       tourData.places = utils.convertToInt(places);
       // console.log(tourData);
       await tourModule.createTour(tourData);
-      res.redirect("/create-tour");
+      res.redirect("/admin/create-tour");
     }
   );
   // =====================================
@@ -75,7 +75,7 @@ module.exports = function(app) {
           placeExists: true
         });
       }
-      res.redirect("/create-tour");
+      res.redirect("/admin/create-tour");
     }
   );
   // =====================================
@@ -87,7 +87,7 @@ module.exports = function(app) {
     middleware.isAdmin,
     async (req, res) => {
       await tourModule.createNewTourType(req.body.type);
-      res.redirect("/create-tour");
+      res.redirect("/admin/create-tour");
     }
   );
   // =====================================

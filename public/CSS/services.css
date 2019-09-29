@@ -1,3 +1,8 @@
+@import url("https://cssak.TravelEasycdn.com/seo/cms-staticpages/sites/all/modules/contrib/ctools/css/ctools.css?pr6mhq");
+@import url("https://cssak.TravelEasycdn.com/seo/cms-staticpages/sites/all/themes/custom/TravelEasy/css/legal/base.css?pr6mhq");
+@import url("https://cssak.TravelEasycdn.com/seo/cms-staticpages/sites/all/themes/custom/TravelEasy/css/legal/screen.css?pr6mhq");
+@import url("https://cssak.TravelEasycdn.com/seo/cms-staticpages/sites/all/themes/custom/TravelEasy/css/legal/main.css?pr6mhq");
+
 body {
   background-color: rgb(103, 197, 235);
 }
@@ -5,4 +10,54 @@ body {
 .tbody {
   text-align: center;
   display: block;
+}
+
+.word-break {
+  word-break: break-all;
+}
+
+.inner-table,
+.inner-table th,
+.inner-table td {
+  border: 1px solid #9b9b9b;
+  padding: 5px;
+}
+
+.separator-line {
+  border-bottom: 2px solid #9b9b9b;
+}
+
+@media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+  .grid_976,
+  .grid_976::before,
+  .grid_976::after {
+    box-sizing: border-box;
+  }
+
+  div.grid_976 {
+    width: 100%;
+  }
+
+  .region-header,
+  #footer_css {
+    display: none;
+  }
+
+  body.html {
+    min-width: auto;
+  }
+
+  .text-11-bold a {
+    display: block;
+    margin-bottom: 6px;
+    line-height: 1.3em;
+  }
+
+  .text-11-bold {
+    vertical-align: top;
+  }
+
+  .text-11-bold img {
+    margin-right: 8px;
+  }
 }

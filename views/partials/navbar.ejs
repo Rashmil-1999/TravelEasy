@@ -1,14 +1,6 @@
-<% include partials/header %>
-
-
-<title>Tours and travels</title>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
     <div class="container">
-        <a class="navbar-brand" href="/">
-            <img src="/Media/logo.png" width="30" height="30" style="border-radius: 4px;"
-                class="d-inline-block align-top" alt="Logo">
-            TravelEasy
-        </a>
+        <a class="navbar-brand" href="/">TravelEasy</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,7 +15,7 @@
                     </span>
                 </li>
                 <% } %>
-                <li class="nav-item">
+                <li class="nav-item <%= nav_attributes.active %>">
                     <a class="nav-link" href="/">Home
                         <span class="sr-only">(current)</span>
                     </a>
@@ -44,38 +36,3 @@
         </div>
     </div>
 </nav>
-
-
-<br>
-<br>
-<br>
-<br>
-<div class="container-fluid">
-    <h3>Your search results for: <strong><%= keyword %></strong></h3>
-</div>
-
-
-<div class="container">
-    <% if(results !== "No Results"){ %>
-    <% for(var i = 0; i< results.length; i++){%>
-    <div class="card mb-3">
-        <img src="<%= results[i].places[0].image_path %>" class="card-img-top" alt="Image here" width="500"
-            height="300">
-        <div class="card-body">
-            <h5 class="card-title"> <a href="<%= "/tours/" + results[i].t_id %>"><%= results[i].name %></a></h5>
-            <p class="card-text"><%= results[i].description %></p>
-            <p class="card-text"><small class="text-muted"><%= results[i].region %></small></p>
-        </div>
-    </div>
-    <% } %>
-    <% }else{ %>
-    <div class="card mb-3">
-        <div class="card-body text-center container">
-            <h2>No such tours! :(</h2>
-        </div>
-    </div>
-    <% } %>
-</div>
-
-
-<% include partials/footer %>
