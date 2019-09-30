@@ -26,7 +26,9 @@ module.exports = function(app) {
     );
     let costs = utils.convertToArray(tour[0].price);
     let description = utils.convertToArray(tour[0].description);
-    // console.log(itinerary, places.length, dates);
+    console.log(tour[0].t_id);
+    let file_path = await tourModule.getFilePath(tour[0].t_id);
+    console.log(file_path.file_path);
     res.render("itinerary", {
       tour: tour[0],
       itinerary: itinerary,
@@ -35,6 +37,7 @@ module.exports = function(app) {
       dates: dates,
       items: items,
       costs: costs,
+      file_path: file_path.file_path,
       user: req.user
     });
   });

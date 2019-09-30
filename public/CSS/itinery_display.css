@@ -62,7 +62,8 @@ body {
   background: #8c6239;
 }
 
-.next, .prev {
+.next,
+.prev {
   color: #444;
   position: absolute;
   top: 250px;
@@ -75,11 +76,13 @@ body {
   transition: box-shadow 0.1s, top 0.1s;
 }
 
-.next:hover, .prev:hover {
+.next:hover,
+.prev:hover {
   color: #000;
 }
 
-.next:active, .prev:active {
+.next:active,
+.prev:active {
   top: 254px;
   box-shadow: 0 1px 0 #999;
 }
@@ -172,7 +175,7 @@ body {
   color: #999;
 }
 
-.btn {
+.btnd {
   background-color: rgb(136, 122, 122);
   display: block;
   margin-left: auto;
@@ -182,4 +185,8 @@ body {
   padding: 12px 30px;
   cursor: pointer;
   font-size: 20px;
+}
+
+.btnd:hover {
+  color: black;
 }

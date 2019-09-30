@@ -93,6 +93,15 @@ tour.getToursByRegion = async () => {
   return dataList;
 };
 
+tour.getFilePath = async t_id => {
+  let dataRes = await database.raw(`
+  SELECT file_path
+  FROM itinerary
+  WHERE t_id=${t_id};
+  `);
+  return dataRes[0][0];
+};
+
 tour.insertTourItinerary = async data => {
   let datares = await database.raw(`
     INSERT INTO itinerary (
