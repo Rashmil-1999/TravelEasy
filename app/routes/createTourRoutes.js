@@ -1,6 +1,7 @@
 let tourModule = require("../models/tours");
 let middleware = require("../middleware/middleware");
 let utils = require("../../utils");
+require("dotenv").config();
 module.exports = function(app) {
   // =====================================
   // CREATE TOUR GET======================
@@ -40,7 +41,7 @@ module.exports = function(app) {
       tourData.places = utils.convertToInt(places);
       // console.log(tourData);
       await tourModule.createTour(tourData);
-      res.redirect("/create-tour");
+      res.redirect("/admin/create-tour");
     }
   );
   // =====================================
@@ -64,7 +65,12 @@ module.exports = function(app) {
         }
       }
       if (i === allPlaces.length) {
-        image.mv(`C:/programming/WD/public/IMAGEUPLOADS/${image.name}`);
+        console.log(
+          `C:/Users/priyal/Desktop/wd_project/public/IMAGEUPLOADS/${image.name}`
+        );
+        image.mv(
+          `C:/Users/priyal/Desktop/wd_project/public/IMAGEUPLOADS/${image.name}`
+        );
         await tourModule.createPlace(place);
       } else {
         let tour_types = await tourModule.getAllTourTypes();
@@ -75,7 +81,7 @@ module.exports = function(app) {
           placeExists: true
         });
       }
-      res.redirect("/create-tour");
+      res.redirect("/admin/create-tour");
     }
   );
   // =====================================
@@ -87,7 +93,7 @@ module.exports = function(app) {
     middleware.isAdmin,
     async (req, res) => {
       await tourModule.createNewTourType(req.body.type);
-      res.redirect("/create-tour");
+      res.redirect("/admin/create-tour");
     }
   );
   // =====================================

@@ -1,5 +1,6 @@
 let tourModule = require("../models/tours");
 let middleware = require("../middleware/middleware");
+let utils = require("../../utils");
 
 module.exports = function(app) {
   // =====================================
@@ -8,8 +9,25 @@ module.exports = function(app) {
   //load the details of the clicked package
   app.get("/tours/:tour_id", async (req, res) => {
     let tour = await tourModule.getTour(req.params.tour_id);
-    console.log(tour[0]);
-    res.send("You selected package id: " + req.params.tour_id + "\n" + tour[0]);
+    let items = ["a", "b", "c", "d", "e", "f"];
+    let itinerary = utils.convertToArray(tour[0].itenary);
+    let places = tour[0].places;
+    let dates = tour[0].dates.map(date =>
+      new Date(date.start_date).toDateString()
+    );
+    let costs = utils.convertToArray(tour[0].price);
+    let description = utils.convertToArray(tour[0].description);
+    // console.log(itinerary, places.length, dates);
+    res.render("itinerary", {
+      tour: tour[0],
+      itinerary: itinerary,
+      description: description,
+      places: places,
+      dates: dates,
+      items: items,
+      costs: costs,
+      user: req.user
+    });
   });
   // =====================================
   // SEARCH ==============================
@@ -17,28 +35,32 @@ module.exports = function(app) {
   app.post("/search", async (req, res) => {
     let search = req.body.search;
     let results = await tourModule.search(search);
-    console.log(results);
+    // let date = new Date(results[0].dates[0].start_date);
+    // console.log(date.toDateString());
     res.render("results", {
       results: results,
       keyword: search,
-      user: req.user
+      user: req.user,
+      nav_attributes: { active: "" }
     });
   });
 
-  app.get("/services", (req, res) => {
-    res.render("services", { user: req.params.user });
+  app.get("/privacy-policy", (req, res) => {
+    res.render("privacy_policy", {
+      user: req.params.user,
+      nav_attributes: { active: "" }
+    });
   });
 
   app.get("/contact", (req, res) => {
-    res.render("contact", { user: req.params.user });
-  });
-
-  app.get("/landing", (req, res) => {
-    res.render("landing", { user: req.params.user });
+    res.render("contact", {
+      user: req.params.user,
+      nav_attributes: { active: "" }
+    });
   });
 
   // testing endpoint (remove it at the end)
   app.get("/test", async (req, res) => {
-    res.render("itinery");
+    res.send(await tourModule.getAllTourIds());
   });
 };

@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <div class="container">
+        <a class="navbar-brand" href="/">TravelEasy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <% if(user){ %>
+                <li class="nav-item">
+                    <span class="navbar-text">
+                        Welcome!
+                        <%= user.fname %>
+                    </span>
+                </li>
+                <% } %>
+                <li class="nav-item <%= nav_attributes.active %>">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <% if(!user){ %>
+                    <a class="nav-link" href="/login">Login</a>
+                    <% }else{ %>
+                    <a class="nav-link" href="/logout">Logout</a>
+                    <% } %>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search destinations..."
+                    aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>

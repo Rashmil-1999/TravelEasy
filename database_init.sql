@@ -21,10 +21,10 @@ CREATE TABLE tour(
 	t_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(60) NOT NULL,
     region VARCHAR(50) NOT NULL,
-    duration VARCHAR(50) NOT NULL,
-    description VARCHAR(500) NOT NULL,
+    duration MEDIUMTEXT NOT NULL,
+    description MEDIUMTEXT NOT NULL,
     itenary MEDIUMTEXT NOT NULL,
-    price VARCHAR(100) NOT NULL,
+    price MEDIUMTEXT NOT NULL,
     tt_id INT NOT NULL,
     FOREIGN KEY (tt_id)
         REFERENCES tour_type(tt_id)

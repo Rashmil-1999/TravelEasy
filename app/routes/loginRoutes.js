@@ -7,17 +7,26 @@ module.exports = function(app, passport) {
   // =====================================
   // HOME PAGE (with login links) ========
   // =====================================
-  app.get("/", (req, res) => {
-    let attributes = { home: "nav-item active", about: "nav-item" };
-    res.render("landing", { user: req.user, attributes: attributes });
+  app.get("/", async (req, res) => {
+    let displayTours = await tourModule.getToursByIds([
+      { t_id: "1" },
+      { t_id: "2" },
+      { t_id: "31" },
+      { t_id: "32" }
+    ]);
+    console.log(displayTours);
+    res.render("landing", {
+      tours: displayTours,
+      user: req.user,
+      nav_attributes: { active: "active" }
+    });
   });
   // =====================================
   // ABOUT ===============================
   // =====================================
   // show the about page
   app.get("/about", (req, res) => {
-    let attributes = { home: "nav-item active", about: "nav-item" };
-    res.render("about", { user: req.user, attributes: attributes });
+    res.render("about", { user: req.user, nav_attributes: { active: "" } });
   });
   // =====================================
   // LOGIN ===============================

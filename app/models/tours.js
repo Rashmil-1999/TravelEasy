@@ -45,6 +45,21 @@ tour.getAllTourTypes = async () => {
   return data[0];
 };
 
+tour.getAllTourIds = async () => {
+  const data = await database.raw(`
+    SELECT t_id
+    FROM tour;
+  `);
+  return data[0];
+};
+
+tour.getToursByIds = async ids => {
+  let newids = [];
+  newids.push(ids);
+  const data = await getToursByGivenIds(newids);
+  return data;
+};
+
 // INSERT operations
 tour.createTour = async tourData => {
   //create the tour here
@@ -115,7 +130,12 @@ tour.search = async keyword => {
     FROM places p
     JOIN tour_places tp
       ON p.pl_id = tp.pl_id
-    WHERE p.name LIKE '${keyword}%';`);
+    JOIN tour t
+      ON tp.t_id = t.t_id
+    WHERE p.name LIKE '${keyword}%' 
+          OR
+          t.name LIKE '${keyword}%';
+    `);
   let response = await getToursByGivenIds(searchResponse);
   return response;
 };
@@ -188,6 +208,7 @@ const getTours = async () => {
 // get all the tours by the id passed in the array
 const getToursByGivenIds = async idArray => {
   if (idArray[0].length) {
+    // console.log(idArray[0][0]);
     let queryCondition = `\nWHERE t.t_id = ${idArray[0][0].t_id}`;
     for (let i = 1; i < idArray[0].length; i++) {
       queryCondition += ` OR t.t_id = ${idArray[0][i].t_id}`;
@@ -206,7 +227,7 @@ const getToursByGivenIds = async idArray => {
     JOIN tour_type tp
       ON t.tt_id = tp.tt_id`;
     let finalQuery = tourQuery + queryCondition;
-    // console.log(finalQuery);
+    console.log(finalQuery);
     let tours = await database.raw(finalQuery);
     tours = await appendAdditionalData(tours[0]);
     return tours;
