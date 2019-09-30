@@ -60,6 +60,39 @@ tour.getToursByIds = async ids => {
   return data;
 };
 
+tour.getToursByRegion = async () => {
+  let data_res = await database.raw(`
+  SELECT DISTINCT region
+  FROM tour
+  `);
+
+  let regions = data_res[0].map(region => region.region);
+  console.log(regions);
+  let dataList = [];
+  let data = {};
+  for (var i = 0; i < regions.length; i++) {
+    let tourResults = await database.raw(
+      `SELECT 
+      t.t_id,
+      t.name,
+      t.region,
+      t.duration,
+      t.description,
+      t.itenary,
+      t.price,
+      tp.type
+    FROM tour t
+    JOIN tour_type tp
+      ON t.tt_id = tp.tt_id
+    WHERE t.region = '${regions[i]}'`
+    );
+    let appendedData = await appendAdditionalData(tourResults[0]);
+    dataList.push(appendedData);
+  }
+  // console.log(dataList);
+  return dataList;
+};
+
 tour.insertTourItinerary = async data => {
   let datares = await database.raw(`
     INSERT INTO itinerary (
