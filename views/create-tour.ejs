@@ -150,6 +150,30 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-body">
+                    <form action="/create-tour_itinerary" method="POST" encType="multipart/form-data">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="places">Select tour:</label>
+                                    <select name="id" id="places" class="form-control">
+                                        <option value="">--Please choose an option--</option>
+                                        <% tourIds.map(tourId => { %>
+                                        <option value=<%= tourId.t_id %>><%= tourId.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="file">Itinerary File:</label>
+                                    <input type="file" name="itinerary" id="file" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center">
+                            <input type="submit" value="Add Tour Itinerary" class="btn btn-primary">
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

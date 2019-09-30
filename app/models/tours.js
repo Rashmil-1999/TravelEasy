@@ -47,7 +47,7 @@ tour.getAllTourTypes = async () => {
 
 tour.getAllTourIds = async () => {
   const data = await database.raw(`
-    SELECT t_id
+    SELECT t_id,name
     FROM tour;
   `);
   return data[0];
@@ -58,6 +58,19 @@ tour.getToursByIds = async ids => {
   newids.push(ids);
   const data = await getToursByGivenIds(newids);
   return data;
+};
+
+tour.insertTourItinerary = async data => {
+  let datares = await database.raw(`
+    INSERT INTO itinerary (
+      t_id,
+      file_path
+    )
+    VALUES(
+      ${data.t_id},
+      "${data.file_path}"
+    );
+  `);
 };
 
 // INSERT operations

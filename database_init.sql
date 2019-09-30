@@ -76,3 +76,14 @@ CREATE TABLE transactions(
     PRIMARY KEY (tr_id)
 )ENGINE=INNODB;
 
+
+CREATE TABLE itinerary(
+	it_id INT NOT NULL AUTO_INCREMENT,
+    t_id INT NOT NULL,
+    file_path VARCHAR(100) NOT NULL,
+    PRIMARY KEY (it_id),
+    FOREIGN KEY (t_id)
+		REFERENCES tour(t_id)
+        ON DELETE CASCADE
+);
+
