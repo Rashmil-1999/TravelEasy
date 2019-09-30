@@ -61,6 +61,6 @@ module.exports = function(app) {
 
   // testing endpoint (remove it at the end)
   app.get("/test", async (req, res) => {
-    res.render("itinerary", { user: req.user });
+    res.send(await tourModule.getAllTourIds());
   });
 };
