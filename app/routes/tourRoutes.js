@@ -3,6 +3,15 @@ let middleware = require("../middleware/middleware");
 let utils = require("../../utils");
 
 module.exports = function(app) {
+  app.get("/tours", async (req, res) => {
+    let toursByRegion = await tourModule.getToursByRegion();
+    console.log(toursByRegion[1].length);
+    res.render("tour-list", {
+      user: req.user,
+      toursByRegion: toursByRegion
+    });
+  });
+
   // =====================================
   // PACKAGE DETAIL ======================
   // =====================================
@@ -61,6 +70,6 @@ module.exports = function(app) {
 
   // testing endpoint (remove it at the end)
   app.get("/test", async (req, res) => {
-    res.send(await tourModule.getAllTourIds());
+    res.send(await tourModule.getToursByRegion());
   });
 };
