@@ -1,6 +1,7 @@
 let tourModule = require("../models/tours");
 let middleware = require("../middleware/middleware");
 let utils = require("../../utils");
+require("dotenv").config();
 module.exports = function(app) {
   // =====================================
   // CREATE TOUR GET======================
@@ -12,9 +13,11 @@ module.exports = function(app) {
     async (req, res) => {
       let tour_types = await tourModule.getAllTourTypes();
       let tour_places = await tourModule.getAllPlaces();
+      let tourIds = await tourModule.getAllTourIds();
       res.render("create-tour", {
         tour_types: tour_types,
         tour_places: tour_places,
+        tourIds: tourIds,
         placeExists: false
       });
     }
@@ -87,6 +90,26 @@ module.exports = function(app) {
     middleware.isAdmin,
     async (req, res) => {
       await tourModule.createNewTourType(req.body.type);
+      res.redirect("/admin/create-tour");
+    }
+  );
+  app.post(
+    "/create-tour_itinerary",
+    middleware.isLoggedIn,
+    middleware.isAdmin,
+    async (req, res) => {
+      let itineraryFile = req.files.itinerary;
+      console.log(itineraryFile.name);
+      let filePath = `/IMAGEUPLOADS/${itineraryFile.name}`;
+      let tourid = req.body.id;
+      let data = {};
+      data.file_path = filePath;
+      data.t_id = parseInt(tourid, 10);
+      console.log(tourid, data.t_id);
+      itineraryFile.mv(
+        `C:/programming/WD/public/IMAGEUPLOADS/${itineraryFile.name}`
+      );
+      await tourModule.insertTourItinerary(data);
       res.redirect("/admin/create-tour");
     }
   );
