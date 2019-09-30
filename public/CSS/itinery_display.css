@@ -36,29 +36,33 @@ body {
   transform: rotateY(0deg) translateZ(250px);
   background: #ed1c24;
 }
+
 .b {
   transform: rotateY(60deg) translateZ(250px);
   background: #0072bc;
 }
+
 .c {
   transform: rotateY(120deg) translateZ(250px);
   background: #39b54a;
 }
+
 .d {
   transform: rotateY(180deg) translateZ(250px);
   background: #f26522;
 }
+
 .e {
   transform: rotateY(240deg) translateZ(250px);
   background: #630460;
 }
+
 .f {
   transform: rotateY(300deg) translateZ(250px);
   background: #8c6239;
 }
 
-.next,
-.prev {
+.next, .prev {
   color: #444;
   position: absolute;
   top: 250px;
@@ -70,18 +74,20 @@ body {
   box-shadow: 0 5px 0 #999;
   transition: box-shadow 0.1s, top 0.1s;
 }
-.next:hover,
-.prev:hover {
+
+.next:hover, .prev:hover {
   color: #000;
 }
-.next:active,
-.prev:active {
+
+.next:active, .prev:active {
   top: 254px;
   box-shadow: 0 1px 0 #999;
 }
+
 .next {
   right: 5em;
 }
+
 .prev {
   left: 5em;
 }
@@ -95,6 +101,7 @@ body {
 */
 
 /* Timeline holder */
+
 ul.timeline {
   list-style-type: none;
   position: relative;
@@ -102,6 +109,7 @@ ul.timeline {
 }
 
 /* Timeline vertical line */
+
 ul.timeline:before {
   content: " ";
   background: #fff;
@@ -119,6 +127,7 @@ li.timeline-item {
 }
 
 /* Timeline item arrow */
+
 .timeline-arrow {
   border-top: 0.5rem solid transparent;
   border-right: 0.5rem solid #fff;
@@ -129,6 +138,7 @@ li.timeline-item {
 }
 
 /* Timeline item circle marker */
+
 li.timeline-item::before {
   content: " ";
   background: #ddd;
@@ -150,6 +160,7 @@ li.timeline-item::before {
 * ==========================================
 *
 */
+
 body {
   background: #e8cbc0;
   background: -webkit-linear-gradient(to right, #e8cbc0, #636fa4);
@@ -159,4 +170,16 @@ body {
 
 .text-gray {
   color: #999;
+}
+
+.btn {
+  background-color: rgb(136, 122, 122);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 20px;
 }
