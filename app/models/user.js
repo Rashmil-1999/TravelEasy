@@ -91,6 +91,15 @@ user.getAllUsers = async () => {
   return usersResult[0];
 };
 
+user.getUserbyId = async id => {
+  let userResult = await database.raw(`
+    SELECT *
+    FROM users
+    WHERE id=${id};
+  `);
+  return userResult[0];
+};
+
 user.createNewAdminUser = async user => {
   let userInsert = await database.raw(
     'INSERT INTO tours.users (email_id, fname, lname, password, is_admin) VALUES ("' +
@@ -111,6 +120,18 @@ user.deleteUserbyId = async id => {
   await database.raw(`
     DELETE 
     FROM users
+    WHERE id=${id};
+  `);
+};
+
+user.updateUserbyId = async (id, user) => {
+  await database.raw(`
+    UPDATE users
+    SET email_id="${user.email_id}",
+        fname="${user.fname}",
+        lname="${user.lname}",
+        password="${user.password}",
+        is_admin=${user.is_admin}
     WHERE id=${id};
   `);
 };

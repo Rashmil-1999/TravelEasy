@@ -122,10 +122,10 @@ module.exports = function(app) {
         }
       }
       if (i === allPlaces.length) {
-        console.log(
+        console.log(`C:/programming/WD/public/IMAGEUPLOADS/${image.name}`);
+        image.mv(
           `C:/Users/priyal/Desktop/wd_project/public/IMAGEUPLOADS/${image.name}`
         );
-        image.mv(`C:/programming/WD/public/IMAGEUPLOADS/${image.name}`);
         await tourModule.createPlace(place);
       } else {
         let tour_types = await tourModule.getAllTourTypes();
@@ -165,7 +165,7 @@ module.exports = function(app) {
       data.t_id = parseInt(tourid, 10);
       console.log(tourid, data.t_id);
       itineraryFile.mv(
-        `C:/programming/WD/public/IMAGEUPLOADS/${itineraryFile.name}`
+        `C:/Users/priyal/Desktop/wd_project/public/IMAGEUPLOADS/${itineraryFile.name}`
       );
       await tourModule.insertTourItinerary(data);
       res.redirect("/admin/create-tour");
@@ -191,6 +191,22 @@ module.exports = function(app) {
     }
   );
 
+  app.get(
+    "/admin/user/edit/:id",
+    middleware.isLoggedIn,
+    middleware.isAdmin,
+    async (req, res) => {
+      let id = req.params.id;
+      let user = await usersModule.getUserbyId(id);
+      console.log(user);
+      res.render("edit-user", {
+        id: id,
+        userL: req.user,
+        user: user[0]
+      });
+    }
+  );
+
   app.post(
     "/edit-tour/:t_id",
     middleware.isLoggedIn,
@@ -210,6 +226,18 @@ module.exports = function(app) {
       tourData.tour.tt_id = parseInt(tourData.tour.tt_id, 10);
       tourData.dates = utils.getReversedDates(dates);
       await tourModule.updateTourbyId(t_id, tourData);
+      res.redirect("/admin");
+    }
+  );
+
+  app.post(
+    "/edit-user/:id",
+    middleware.isLoggedIn,
+    middleware.isAdmin,
+    async (req, res) => {
+      let id = req.params.id;
+      let user = req.body.user;
+      await usersModule.updateUserbyId(id, user);
       res.redirect("/admin");
     }
   );
