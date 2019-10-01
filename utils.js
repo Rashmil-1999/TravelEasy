@@ -15,3 +15,40 @@ module.exports.convertToArray = inputString => {
     return value.trim();
   });
 };
+
+module.exports.getPlacesFromTourLists = tourData => {
+  return tourData.map(tour => {
+    let { places } = tour;
+    let placeArray = [];
+    for (var i = 0; i < places.length; i++) {
+      placeArray.push(places[i].name);
+    }
+    return placeArray;
+  });
+};
+
+module.exports.getDatesFromTourLists = tourData => {
+  return tourData.map(tour => {
+    let { dates } = tour;
+    let datesArray = dates.map(date =>
+      new Date(date.start_date).toDateString()
+    );
+    let dateArray = [];
+    for (var i = 0; i < datesArray.length; i++) {
+      dateArray.push(datesArray[i]);
+    }
+    return dateArray;
+  });
+};
+
+module.exports.getPricesFromTourList = tourData => {
+  return tourData.map(tour => {
+    return this.convertToArray(tour.price);
+  });
+};
+
+module.exports.getDescriptionFromTourList = tourData => {
+  return tourData.map(tour => {
+    return this.convertToArray(tour.description);
+  });
+};

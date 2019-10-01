@@ -5,6 +5,7 @@
 // var mysql = require("mysql");
 var conn = require("./mysqlConn");
 var passport = require("passport");
+var database = require("./knexClient");
 
 var user = {
   id: "",
@@ -80,6 +81,38 @@ user.createNewUser = function(user, callback) {
       callback(err, result);
     }
   );
+};
+
+user.getAllUsers = async () => {
+  let usersResult = await database.raw(`
+    SELECT * 
+    FROM users;
+  `);
+  return usersResult[0];
+};
+
+user.createNewAdminUser = async user => {
+  let userInsert = await database.raw(
+    'INSERT INTO tours.users (email_id, fname, lname, password, is_admin) VALUES ("' +
+      user.email_id +
+      '", "' +
+      user.fname +
+      '", "' +
+      user.lname +
+      '", "' +
+      user.password +
+      '",' +
+      user.is_admin +
+      ")"
+  );
+};
+
+user.deleteUserbyId = async id => {
+  await database.raw(`
+    DELETE 
+    FROM users
+    WHERE id=${id};
+  `);
 };
 
 module.exports = user;

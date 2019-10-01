@@ -195,6 +195,45 @@ tour.search = async keyword => {
   return response;
 };
 
+tour.updateTourbyId = async (t_id, tourData) => {
+  await deleteOldEntries(t_id);
+  const { tour, places, dates } = tourData;
+  const dataRes = await database.raw(`
+    UPDATE tour 
+    SET name="${tour.name}",
+        region="${tour.region}",
+        duration="${tour.duration}",
+        description="${tour.description}",
+        itenary="${tour.itenary}",
+        price="${tour.price}",
+        tt_id=${tour.tt_id}
+    WHERE t_id=${t_id};
+  `);
+
+  for (let i = 0; i < places.length; i++) {
+    await newTourPlaces(t_id, places[i]);
+  }
+  for (let i = 0; i < dates.length; i++) {
+    await newDateEntry(t_id, dates[i]);
+  }
+};
+
+tour.deleteTourbyId = async t_id => {
+  let result = await database.raw(`
+    DELETE 
+    FROM tour 
+    WHERE (t_id = '${t_id}');
+  `);
+};
+
+const deleteOldEntries = async t_id => {
+  let deleteDateQuery = `DELETE FROM dates WHERE (t_id = '${t_id}');`;
+  let deleteTourPlacesQuery = `DELETE FROM tour_places WHERE (t_id = '${t_id}')`;
+
+  await database.raw(deleteDateQuery);
+  await database.raw(deleteTourPlacesQuery);
+};
+
 //create new date entry
 const newDateEntry = async (t_id, date) => {
   let query = `INSERT INTO dates (t_id,start_date) VALUES(${t_id},"${date}");`;
