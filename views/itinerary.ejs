@@ -46,8 +46,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/tours">Tours
-          </a>
+          <a class="nav-link" href="/tours">Tours </a>
         </li>
         <li class="nav-item">
           <% if(!user){ %>
@@ -174,16 +173,15 @@
     </div>
   </div>
 </div>
-<a href="\IMAGEUPLOADS\char_dham.rtf" download>
-  <button class="btn">
-    <i class="fa fa-download"></i> Download full itinery
-  </button>
-</a>
+<div class="container">
+  <a href="<%= file_path %>" class="nav-link" download>
+    <button class="btnd">
+      <i class="fa fa-download"></i> Download full itinery
+    </button>
+  </a>
+</div>
 
-<button class="btn2">
-  <i class="fa fa-download"></i> Download full itinery
-</button>
-
+<button class="btnd"><i class="fa fa-download"></i> Send via Email</button>
 
 <br /><br />
 <!--optional javascript and Jquery-->

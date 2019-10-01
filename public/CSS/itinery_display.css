@@ -172,7 +172,7 @@ body {
   color: #999;
 }
 
-.btn {
+.btnd {
   background-color: rgb(136, 122, 122);
   display: block;
   margin-left: auto;
@@ -184,3 +184,6 @@ body {
   font-size: 20px;
 }
 
+.btnd:hover {
+  color: black;
+}
