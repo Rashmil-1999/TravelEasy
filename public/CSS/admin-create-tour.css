@@ -1,0 +1,7 @@
+body {
+  background-color: rgb(184, 235, 241);
+}
+
+.nav-hover:hover {
+  color: white;
+}

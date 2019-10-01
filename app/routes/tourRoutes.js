@@ -52,8 +52,7 @@ module.exports = function(app) {
     res.render("results", {
       results: results,
       keyword: search,
-      user: req.user,
-      nav_attributes: { active: "" }
+      user: req.user
     });
   });
 

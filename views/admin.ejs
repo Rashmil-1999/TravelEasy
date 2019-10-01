@@ -1,0 +1,190 @@
+<% include partials/header %>
+<script src="https://kit.fontawesome.com/bacc313907.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/CSS/admin.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<title>Travel Easy Admin</title>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/admin">
+            <img src="/Media/logo.png" width="30" height="30" style="border-radius: 4px;"
+                class="d-inline-block align-top" alt="Logo">
+            Admin
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <% if(user){ %>
+                <li class="nav-item ">
+                    <span class="navbar-text nav-hover">
+                        (Admin)
+                        <%= user.fname %>
+                    </span>
+                </li>
+                <% } %>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin">Admin Panel
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-hover" href="/admin/create-tour">Create Tours
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <% if(!user){ %>
+                    <a class="nav-link nav-hover" href="/login">Login</a>
+                    <% }else{ %>
+                    <a class="nav-link nav-hover" href="/logout">Logout</a>
+                    <% } %>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br><br><br>
+<div class="container-fluid">
+    <h3 class="display-4">Tour Table:</h3>
+</div>
+<div class="container-fluid">
+    <table class="table table-hover table-secondary text-center table-sm">
+        <caption>List of Tours Total:<%= tourCount %></caption>
+        <thead>
+            <tr>
+                <th scope="col">TourId</th>
+                <th scope="col">Tour Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Pricing</th>
+                <th scope="col">Region</th>
+                <th scope="col">Tour Type</th>
+                <th scope="col">Places Covered</th>
+                <th scope="col">Dates</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < toursData.length; i++){ %>
+            <tr>
+                <td><%= toursData[i].t_id %></td>
+                <td><%= toursData[i].name %></td>
+                <td>
+                    <ul>
+                        <% for(var j=0; j< descriptionArray[i].length; j++){ %>
+                        <li class="card-text">
+                            <small class="text-muted"><%= descriptionArray[i][j] %></small>
+                        </li>
+                        <% } %>
+                    </ul>
+                </td>
+                <td><%= toursData[i].duration %></td>
+                <td>
+                    <ul>
+                        <% for(var k=0; k< pricesArray[i].length; k++){ %>
+                        <li class="card-text">
+                            <small class="text-muted"><%= pricesArray[i][k] %></small>
+                        </li>
+                        <% } %>
+                    </ul>
+                </td>
+                <td><%= toursData[i].region %></td>
+                <td><%= toursData[i].type %></td>
+                <td>
+                    <ul>
+                        <% for(var l=0; l< placesArray[i].length; l++){ %>
+                        <li class="card-text">
+                            <small class="text-muted"><%= placesArray[i][l] %></small>
+                        </li>
+                        <% } %>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <% for(var m=0; m< pricesArray[i].length; m++){ %>
+                        <li class="card-text">
+                            <small class="text-muted"><%= datesArray[i][m] %></small>
+                        </li>
+                        <% } %>
+                    </ul>
+                </td>
+                <td>
+                    <a href="/admin/tour/edit/<%= toursData[i].t_id %>">
+                        <button class="btn btn-warning" style="width: 2.7rem;"><i class="fas fa-pen"></i></button>
+                    </a>
+                    <a href="/admin/tour/delete/<%= toursData[i].t_id %>">
+                        <button class="btn btn-danger" style="width: 2.7rem;"><i class="fas fa-trash-alt"></i></button>
+                    </a>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<br><br>
+<div class="container-fluid">
+    <h3 class="display-4">Users Table:</h3>
+</div>
+<div class="container-fluid">
+    <table class="table table-hover table-secondary text-center table-sm">
+        <caption>List of Users Total:<%= usersCount %></caption>
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">EmailId</th>
+                <th scope="col">Password</th>
+                <th scope="col">Is Admin</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < usersData.length; i++){ %>
+            <tr>
+                <td><%= usersData[i].id %></td>
+                <td><%= usersData[i].fname %></td>
+                <td><%= usersData[i].lname %></td>
+                <td><%= usersData[i].email_id %></td>
+                <td><%= usersData[i].password %></td>
+                <td><%= usersData[i].is_admin %></td>
+                <td>
+                    <a href="/admin/user/edit/<%= usersData[i].id %>">
+                        <button class="btn btn-warning" style="width: 2.7rem;"><i class="fas fa-pen"></i></button>
+                    </a>
+                    <a href="/admin/user/delete/<%= usersData[i].id %>">
+                        <button class="btn btn-danger" style="width: 2.7rem;"><i class="fas fa-trash-alt"></i></button>
+                    </a>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<br><br>
+<div class="container-fluid">
+    <h3 class="display-4">Tour types Table:</h3>
+</div>
+<div class="container-fluid">
+    <table class="table table-hover table-secondary text-center table-sm">
+        <caption>List of all Tour-types Total:<%= tourTypesCount %></caption>
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < tourTypes.length; i++){ %>
+            <tr>
+                <td><%= tourTypes[i].tt_id %></td>
+                <td><%= tourTypes[i].type %></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<% include partials/footer %>

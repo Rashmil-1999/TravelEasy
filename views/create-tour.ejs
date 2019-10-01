@@ -1,90 +1,55 @@
 <% include partials/header %>
 
 <link rel="stylesheet" href="CSS/date_picker.css">
-<link rel="stylesheet" href="/CSS/admin.css">
+<link rel="stylesheet" href="/CSS/admin-create-tour.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-<br>
-<div class="container text-center">
-    <div class="row align-items-center">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    Add Tour
-                </div>
-                <div class="card-body">
-                    <form action="/create-tour" method="POST">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="name">Tour Name</label>
-                                    <input type="text" placeholder="Name of Tour" id="name" class="form-control"
-                                        name="tour[name]">
-                                </div>
-                                <div class="col">
-                                    <label for="region">Region</label>
-                                    <input type="text" placeholder="Region" id="region" class="form-control"
-                                        name="tour[region]">
-                                </div>
-                                <div class="col">
-                                    <label for="duration">Duration</label>
-                                    <input type="text" placeholder="Duration" id="duration" class="form-control"
-                                        name="tour[duration]">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <input type="text" placeholder="Description" name="tour[description]"> -->
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea name="tour[description]" id="description" placeholder="Highlights of the Tour" class="form-control" cols="40"
-                                rows="5"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="itenary">Itenary</label>
-                            <textarea name="tour[itenary]" id="itenary" placeholder="Itenary of the Tour" class="form-control" cols="40"
-                                rows="5"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="price">Pricing</label>
-                                    <input type="text" placeholder="Pricing" id="price" class="form-control"
-                                        name="tour[price]">
-                                </div>
-                                <div class="col">
-                                    <label for="type">Select Tour type:</label>
-                                    <select name="tour[tt_id]" id="type" class="form-control">
-                                        <option value="">--Please choose an option--</option>
-                                        <% tour_types.map(tour_type => { %>
-                                        <option value=<%= tour_type.tt_id %>><%= tour_type.type %></option>
-                                        <% }) %>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <label for="places">Select Places:</label>
-                                    <select name="places" id="places" class="form-control" multiple size="3">
-                                        <option value="">--Please choose an option--</option>
-                                        <% tour_places.map(tour_place => { %>
-                                        <option value=<%= tour_place.pl_id %>><%= tour_place.name %></option>
-                                        <% }) %>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <label for="date">Pick Dates:</label>
-                                <input type="text" class="form-control date" name="dates" placeholder="Pick dates">
-                            </div>
-                        </div>
-
-                        <div class="container text-center">
-                            <input type="submit" class="btn btn-primary" placeholder="Create Tour">
-                        </div>
-                    </form>
-                </div>
-            </div>
+<br><br><br>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/admin">
+            <img src="/Media/logo.png" width="30" height="30" style="border-radius: 4px;"
+                class="d-inline-block align-top" alt="Logo">
+            Admin
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <% if(user){ %>
+                <li class="nav-item nav-hover">
+                    <span class="navbar-text nav-hover">
+                        (Admin)
+                        <%= user.fname %>
+                    </span>
+                </li>
+                <% } %>
+                <li class="nav-item">
+                    <a class="nav-link nav-hover" href="/admin">Admin Panel
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item  active">
+                    <a class="nav-link" href="/admin/create-tour">Create Tours
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <% if(!user){ %>
+                    <a class="nav-link nav-hover" href="/login">Login</a>
+                    <% }else{ %>
+                    <a class="nav-link nav-hover" href="/logout">Logout</a>
+                    <% } %>
+                </li>
+            </ul>
         </div>
     </div>
-    <br>
+</nav>
+
+
+<br>
+<div class="container">
     <div class="row">
         <div class="col">
             <div class="card">
@@ -118,10 +83,12 @@
             </div>
         </div>
     </div>
-    <br>
+</div>
+<br>
+<div class="container">
     <div class="row">
         <div class="col">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-header">
                     Add Tour Type
                 </div>
@@ -149,6 +116,12 @@
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    Upload Itinerary File
                 </div>
                 <div class="card-body">
                     <form action="/create-tour_itinerary" method="POST" encType="multipart/form-data">
@@ -178,6 +151,134 @@
         </div>
     </div>
 </div>
+
+<div class="container text-center">
+    <div class="row align-items-center">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Add Tour
+                </div>
+                <div class="card-body">
+                    <form action="/create-tour" method="POST">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="name">Tour Name</label>
+                                    <input type="text" placeholder="Name of Tour" id="name" class="form-control"
+                                        name="tour[name]">
+                                </div>
+                                <div class="col">
+                                    <label for="region">Region</label>
+                                    <input type="text" placeholder="Region" id="region" class="form-control"
+                                        name="tour[region]">
+                                </div>
+                                <div class="col">
+                                    <label for="duration">Duration</label>
+                                    <input type="text" placeholder="Duration" id="duration" class="form-control"
+                                        name="tour[duration]">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <input type="text" placeholder="Description" name="tour[description]"> -->
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="tour[description]" id="description" placeholder="Highlights of the Tour"
+                                class="form-control" cols="40" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="itenary">Itenary</label>
+                            <textarea name="tour[itenary]" id="itenary" placeholder="Itenary of the Tour"
+                                class="form-control" cols="40" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="price">Pricing</label>
+                                    <input type="text" placeholder="Pricing" id="price" class="form-control"
+                                        name="tour[price]">
+                                </div>
+                                <div class="col">
+                                    <label for="type">Select Tour type:</label>
+                                    <select name="tour[tt_id]" id="type" class="form-control">
+                                        <option value="">--Please choose an option--</option>
+                                        <% tour_types.map(tour_type => { %>
+                                        <option value=<%= tour_type.tt_id %>><%= tour_type.type %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="places">Select Places:</label>
+                                    <select name="places" id="places" class="form-control" multiple size="3">
+                                        <option value="">--Please choose an option--</option>
+                                        <% tour_places.map(tour_place => { %>
+                                        <option value=<%= tour_place.pl_id %>><%= tour_place.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label for="date">Pick Dates:</label>
+                                <input type="text" class="form-control date" name="dates" placeholder="Pick dates">
+                            </div>
+                        </div>
+                        <div class="container text-center">
+                            <input type="submit" class="btn btn-primary" placeholder="Create Tour">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Add Admin User
+        </div>
+        <div class="card-body">
+            <form action="/admin/register" method="post" autocomplete="off">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <input type="mail" class="form-control" placeholder="Email" name="user[email_id]" value=""
+                                required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="First Name" name="user[fname]" value=""
+                                required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Last Name" name="user[lname]" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <input type="password" class="form-control" placeholder="Password" name="user[password]"
+                                value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info btn-block round-button">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<br>
 <!-- Optional JavaScript -->
 <script type="text/javascript">
     $('.date').datepicker({

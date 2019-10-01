@@ -1,8 +1,62 @@
 let tourModule = require("../models/tours");
 let middleware = require("../middleware/middleware");
 let utils = require("../../utils");
+let usersModule = require("../models/user");
 require("dotenv").config();
 module.exports = function(app) {
+  // =====================================
+  // ALL TOURS ===========================
+  // =====================================
+  app.get(
+    "/admin",
+    middleware.isLoggedIn,
+    middleware.isAdmin,
+    async (req, res) => {
+      let toursData = await tourModule.getAllTours();
+      let tourCount = toursData.length;
+      let usersData = await usersModule.getAllUsers();
+      let usersCount = usersData.length;
+      let tourTypes = await tourModule.getAllTourTypes();
+      let tourTypesCount = tourTypes.length;
+      let placeArrayData = utils.getPlacesFromTourLists(toursData);
+      let dateArrayData = utils.getDatesFromTourLists(toursData);
+      let pricesArrayData = utils.getPricesFromTourList(toursData);
+      let descriptionArrayData = utils.getDescriptionFromTourList(toursData);
+      // console.log(placeArrayData);
+      // console.log(dateArrayData);
+      // console.log(pricesArrayData[0][0]);
+      // console.log(descriptionArrayData);
+      res.render("admin", {
+        user: req.user,
+        toursData: toursData,
+        tourCount: tourCount,
+        placesArray: placeArrayData,
+        datesArray: dateArrayData,
+        pricesArray: pricesArrayData,
+        descriptionArray: descriptionArrayData,
+        usersData: usersData,
+        usersCount: usersCount,
+        tourTypes: tourTypes,
+        tourTypesCount: tourTypesCount
+      });
+
+      // console.log(descriptionArrayData);
+      // res.send(descriptionArrayData);
+    }
+  );
+
+  app.post(
+    "/admin/register",
+    middleware.isLoggedIn,
+    middleware.isAdmin,
+    async (req, res) => {
+      let user = req.body.user;
+      user.is_admin = 1;
+      await usersModule.createNewAdminUser(user);
+      res.redirect("/admin");
+    }
+  );
+
   // =====================================
   // CREATE TOUR GET======================
   // =====================================
@@ -15,6 +69,7 @@ module.exports = function(app) {
       let tour_places = await tourModule.getAllPlaces();
       let tourIds = await tourModule.getAllTourIds();
       res.render("create-tour", {
+        user: req.user,
         tour_types: tour_types,
         tour_places: tour_places,
         tourIds: tourIds,
@@ -43,7 +98,7 @@ module.exports = function(app) {
       tourData.places = utils.convertToInt(places);
       // console.log(tourData);
       await tourModule.createTour(tourData);
-      res.redirect("/admin/create-tour");
+      res.redirect("/admin");
     }
   );
   // =====================================
@@ -116,17 +171,68 @@ module.exports = function(app) {
       res.redirect("/admin/create-tour");
     }
   );
-  // =====================================
-  // ALL TOURS ===========================
-  // =====================================
+
   app.get(
-    "/admin/tours",
+    "/admin/tour/edit/:t_id",
     middleware.isLoggedIn,
     middleware.isAdmin,
     async (req, res) => {
-      let tours = await tourModule.getAllTours();
-      console.log("from handler: " + tours);
-      res.send(tours);
+      let t_id = req.params.t_id;
+      let tour = await tourModule.getTour(t_id);
+      let tour_types = await tourModule.getAllTourTypes();
+      let tour_places = await tourModule.getAllPlaces();
+      res.render("edit-tour", {
+        t_id: t_id,
+        tour: tour[0],
+        tour_types: tour_types,
+        tour_places: tour_places,
+        user: req.user
+      });
+    }
+  );
+
+  app.post(
+    "/edit-tour/:t_id",
+    middleware.isLoggedIn,
+    middleware.isAdmin,
+    async (req, res) => {
+      let t_id = req.params.t_id;
+      let tourData = {};
+      let dates = req.body.dates.split(",");
+      if (typeof req.body.places !== "object") {
+        tourData.places = [];
+        tourData.places[0] = req.body.places;
+      } else {
+        let places = req.body.places;
+        tourData.places = utils.convertToInt(places);
+      }
+      tourData.tour = req.body.tour;
+      tourData.tour.tt_id = parseInt(tourData.tour.tt_id, 10);
+      tourData.dates = utils.getReversedDates(dates);
+      await tourModule.updateTourbyId(t_id, tourData);
+      res.redirect("/admin");
+    }
+  );
+
+  app.get(
+    "/admin/tour/delete/:t_id",
+    middleware.isLoggedIn,
+    middleware.isAdmin,
+    async (req, res) => {
+      let t_id = req.params.t_id;
+      await tourModule.deleteTourbyId(t_id);
+      res.redirect("/admin");
+    }
+  );
+
+  app.get(
+    "/admin/user/delete/:id",
+    middleware.isLoggedIn,
+    middleware.isAdmin,
+    async (req, res) => {
+      let id = req.params.id;
+      await usersModule.deleteUserbyId(id);
+      res.redirect("/admin");
     }
   );
 };

@@ -179,7 +179,7 @@
     <div class="card-deck">
         <% for(var j=0; j< tours.length; j++){ %>
         <div class="card border-secondary">
-            <img src="" class="card-img-top" alt="...">
+            <img src="<%= tours[j].places[0].image_path %>" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><a href="/tours/<%= tours[j].t_id %>"><%= tours[j].name %></a></h5>
                 <p class=" card-text">
@@ -429,7 +429,7 @@
                     <p><u><a href="#">TravelEasy</a></u> is a Registered Website helping umpteen people explore
                         India.
                     </p>
-                    <p class="h6"> All right Reserved.></p>
+                    <p class="h6"> All right Reserved.</p>
                 </div>
                 </hr>
             </div>
