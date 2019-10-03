@@ -1,7 +1,8 @@
 <% include partials/header %>
 
-
+<link rel="stylesheet" href="/CSS/search.css">
 <title>Tours and travels</title>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">
@@ -50,21 +51,31 @@
 </nav>
 
 
+
 <br>
 <br>
 <br>
-<br>
+
+
+
+<div class="main">
+    
 <div class="container-fluid">
     <h3>Your search results for: <strong><%= keyword %></strong></h3>
 </div>
 
 
+
+
+<div class="card-container">
+        
+        
 <div class="container">
     <% if(results !== "No Results"){ %>
     <% for(var i = 0; i< results.length; i++){%>
     <div class="card mb-3">
-        <img src="<%= results[i].places[0].image_path %>" class="card-img-top" alt="Image here" width="500"
-            height="300">
+        <img src="<%= results[i].places[0].image_path %>" class="card-img-top" alt="Image here" width="300"
+            height="400">
         <div class="card-body">
             <h5 class="card-title"> <a href="<%= "/tours/" + results[i].t_id %>"><%= results[i].name %></a></h5>
             <p class="card-text"><%= results[i].description %></p>
@@ -79,6 +90,8 @@
         </div>
     </div>
     <% } %>
+</div>
+</div>
 </div>
 
 
