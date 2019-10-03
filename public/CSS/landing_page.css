@@ -20,8 +20,7 @@ body {
   background: #eee !important;
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:hover, .btn-primary:focus {
   background-color: #108d6f;
   border-color: #108d6f;
   box-shadow: none;
@@ -50,8 +49,7 @@ section .section-title {
   background: #ffffff;
 }
 
-.image-flip:hover .backside,
-.image-flip.hover .backside {
+.image-flip:hover .backside, .image-flip.hover .backside {
   -webkit-transform: rotateY(0deg);
   -moz-transform: rotateY(0deg);
   -o-transform: rotateY(0deg);
@@ -60,8 +58,7 @@ section .section-title {
   border-radius: 0.25rem;
 }
 
-.image-flip:hover .frontside,
-.image-flip.hover .frontside {
+.image-flip:hover .frontside, .image-flip.hover .frontside {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
@@ -104,8 +101,7 @@ section .section-title {
   box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
 }
 
-.frontside,
-.backside {
+.frontside, .backside {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -ms-backface-visibility: hidden;
@@ -122,8 +118,7 @@ section .section-title {
   transform-style: preserve-3d;
 }
 
-.frontside .card,
-.backside .card {
+.frontside .card, .backside .card {
   min-height: 312px;
 }
 
@@ -132,8 +127,7 @@ section .section-title {
   color: #007b5e !important;
 }
 
-.frontside .card .card-title,
-.backside .card .card-title {
+.frontside .card .card-title, .backside .card .card-title {
   color: #007b5e !important;
 }
 
@@ -239,8 +233,7 @@ body {
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
 
 @media (max-width: 400px) {
-  .side,
-  .middle {
+  .side, .middle {
     width: 100%;
   }
   /* Hide the right column on small screens */
@@ -281,16 +274,12 @@ h5.tour-video {
 }
 
 .bottom {
-  position: absolute;
+  position: relative;
 }
 
 #gradient {
   background: #999955;
-  background-image: linear-gradient(
-    rgb(183, 117, 228) 20%,
-    rgb(84, 45, 175) 50%,
-    rgb(250, 160, 223) 30%
-  );
+  background-image: linear-gradient( rgb(183, 117, 228) 20%, rgb(84, 45, 175) 50%, rgb(250, 160, 223) 30%);
   margin: 0 auto;
   margin-top: 100px;
   width: 100%;
@@ -360,6 +349,15 @@ p.content {
   font-weight: bold;
 }
 
+.card-display {
+  background-color: grey;
+  text-align: center;
+}
+
+.line-break {
+  background-color: grey;
+}
+
 /* Footer */
 
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
@@ -411,8 +409,7 @@ section .section-title {
   margin-top: -10px;
 }
 
-#footer ul.social li a,
-#footer ul.quick-links li a {
+#footer ul.social li a, #footer ul.quick-links li a {
   color: #ffffff;
 }
 

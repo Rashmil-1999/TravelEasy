@@ -1,3 +1,7 @@
+.main {
+  background-color: rgb(253, 253, 105);
+}
+
 /*footer*/
 
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
@@ -48,8 +52,7 @@ section .section-title {
   margin-top: -10px;
 }
 
-#footer ul.social li a,
-#footer ul.quick-links li a {
+#footer ul.social li a, #footer ul.quick-links li a {
   color: #ffffff;
 }
 

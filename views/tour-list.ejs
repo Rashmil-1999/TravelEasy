@@ -48,6 +48,8 @@
     </div>
 </nav>
 
+<div class="main">
+
 <div style="height: 60px;"></div>
 
 <div class="container">
@@ -58,7 +60,7 @@
     <div class="card-deck mb-4">
         <% for(var k=0; k< toursByRegion[j].length; k++){ %>
         <div class="card border-secondary">
-            <img src="<%= toursByRegion[j][k].places[0].image_path %>" class="card-img-top" alt="...">
+            <img src="<%= toursByRegion[j][k].places[0].image_path %>" class="card-img-top" alt="..." width="50px" height="350px">
             <div class="card-body">
                 <h5 class="card-title"><a
                         href="/tours/<%= toursByRegion[j][k].t_id %>"><%= toursByRegion[j][k].name %></a></h5>
@@ -80,6 +82,8 @@
         <% } %>
     </div>
     <% } %>
+</div>
+
 </div>
 
 <div class="container-fluid">
