@@ -2,6 +2,14 @@ body {
   background: #333;
 }
 
+.navbar-brand {
+  float: left;
+  position: fixed;
+  left: 20;
+  top: 8;
+  display: inline;
+}
+
 .carousel-container {
   margin: 0 auto;
   width: 250px;

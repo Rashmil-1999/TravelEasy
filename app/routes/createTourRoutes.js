@@ -123,9 +123,7 @@ module.exports = function(app) {
       }
       if (i === allPlaces.length) {
         console.log(`C:/programming/WD/public/IMAGEUPLOADS/${image.name}`);
-        image.mv(
-          `C:/Users/priyal/Desktop/wd_project/public/IMAGEUPLOADS/${image.name}`
-        );
+        image.mv(process.env.PATHdir + `/IMAGEUPLOADS/${image.name}`);
         await tourModule.createPlace(place);
       } else {
         let tour_types = await tourModule.getAllTourTypes();
@@ -165,7 +163,7 @@ module.exports = function(app) {
       data.t_id = parseInt(tourid, 10);
       console.log(tourid, data.t_id);
       itineraryFile.mv(
-        `C:/Users/priyal/Desktop/wd_project/public/IMAGEUPLOADS/${itineraryFile.name}`
+        process.env.PATHdir + `/IMAGEUPLOADS/${itineraryFile.name}`
       );
       await tourModule.insertTourItinerary(data);
       res.redirect("/admin/create-tour");

@@ -2,6 +2,14 @@
   color: white;
 }
 
+.navbar-brand {
+  float: left;
+  position: fixed;
+  left: 20;
+  top: 8;
+  display: inline;
+}
+
 body {
   background-color: rgb(247, 221, 225);
 }

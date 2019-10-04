@@ -12,12 +12,23 @@ body {
   transform: translate(-50%, -50%);
   width: 400px;
   padding: 60px 40px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 0 auto;
+  /* Added */
+  float: none;
+  /* Added */
+  margin-bottom: 10px;
+  /* Added */
 }
+
 .login-form h2 {
   margin: 0 0 40px;
   padding: 0;
   text-align: center;
 }
+
 .login-form .form-input {
   position: relative;
   margin: 20px 0;
@@ -33,6 +44,7 @@ body {
   background: transparent;
   font-size: 18px;
 }
+
 .login-form .form-input input[type="submit"] {
   background: #e91e63;
   border: 3px solid #f1f1f1;
@@ -44,9 +56,11 @@ body {
   cursor: pointer;
   color: #fff;
 }
+
 .login-form .form-input input[type="submit"]:hover {
   background: #0090ff;
 }
+
 .lgin-form .forget {
   display: block;
   margin-top: 30px;

@@ -173,14 +173,16 @@
     </div>
   </div>
 </div>
+<% if(file_path !== 'undefined'){ %>
 <div class="container">
-  <a href="<%= file_path %>" class="nav-link" download>
+  <a href="<%= file_path.file_path %>" class="nav-link" download>
     <button class="btnd">
       <i class="fa fa-download"></i> Download full itinery
     </button>
   </a>
 </div>
-<br>
+<% } %>
+<br />
 
 <button class="btnd"><i class="fa fa-download"></i> Send via Email</button>
 
