@@ -1,33 +1,17 @@
 <% include partials/header %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/CSS/itinery_display.css" />
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <img
-        src="/Media/logo.png"
-        width="30"
-        height="30"
-        style="border-radius: 4px;"
-        class="d-inline-block align-top"
-        alt="Logo"
-      />
+      <img src="/Media/logo.png" width="30" height="30" style="border-radius: 4px;" class="d-inline-block align-top"
+        alt="Logo" />
       TravelEasy
     </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarResponsive"
-      aria-controls="navbarResponsive"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -40,8 +24,7 @@
         </li>
         <% } %>
         <li class="nav-item">
-          <a class="nav-link" href="/"
-            >Home
+          <a class="nav-link" href="/">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
@@ -57,13 +40,8 @@
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          name="search"
-          placeholder="Search destinations..."
-          aria-label="Search"
-        />
+        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search destinations..."
+          aria-label="Search" />
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
           Search
         </button>
@@ -78,11 +56,7 @@
 <div class="carousel-container">
   <div class="carousel">
     <% for(var i=0; i < places.length && i < 6; i++ ) { %>
-    <img
-      src="<%= places[i].image_path %>"
-      class="item <%= items[i] %>"
-      alt="<%= places[i].name %>"
-    />
+    <img src="<%= places[i].image_path %>" class="item <%= items[i] %>" alt="<%= places[i].name %>" />
     <% } %>
     <!-- <img src="/IMAGEUPLOADS/IMG_1362.JPG" class="item f" alt="image"> -->
   </div>
@@ -173,13 +147,15 @@
     </div>
   </div>
 </div>
+<% if(file_path){ %>
 <div class="container">
-  <a href="<%= file_path %>" class="nav-link" download>
+  <a href="<%= file_path.file_path %>" class="nav-link" download>
     <button class="btnd">
       <i class="fa fa-download"></i> Download full itinery
     </button>
   </a>
 </div>
+<% } %>
 <br>
 
 <button class="btnd"><i class="fa fa-download"></i> Send via Email</button>
