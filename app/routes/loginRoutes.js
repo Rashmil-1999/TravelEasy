@@ -9,9 +9,8 @@ module.exports = function(app, passport) {
   // =====================================
   app.get("/", async (req, res) => {
     let displayTours = await tourModule.getToursByIds([
-      { t_id: "1" },
-      { t_id: "2" },
-      { t_id: "31" },
+      { t_id: "33" },
+      { t_id: "35" },
       { t_id: "32" }
     ]);
     console.log(displayTours);

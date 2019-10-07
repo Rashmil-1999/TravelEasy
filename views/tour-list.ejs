@@ -51,37 +51,36 @@
 <div class="main">
 
     <div style="height: 60px;"></div>
-
     <div class="container">
         <% for(var j=0; j< toursByRegion.length; j++){ %>
         <div class="container bg-light mr-1">
             <h3>Region: <span class="badge badge-secondary"><%= toursByRegion[j][0].region %></span></h3>
         </div>
-        <div class="card-deck mb-4">
-            <% for(var k=0; k< toursByRegion[j].length; k++){ %>
-            <div class="card border-secondary">
-                <img src="<%= toursByRegion[j][k].places[0].image_path %>" class="card-img-top" alt="..." width="50px"
-                    height="350px">
-                <div class="card-body">
-                    <h5 class="card-title"><a
-                            href="/tours/<%= toursByRegion[j][k].t_id %>"><%= toursByRegion[j][k].name %></a></h5>
-                    <p class=" card-text">
-                        <h6 class="card-subtitle mb-2">Places Covered:</h6>
-                        <ul>
-                            <% for(var i=0; i< toursByRegion[j][k].places.length; i++){ %>
-                            <li class="card-text">
-                                <small class="text-muted"><%= toursByRegion[j][k].places[i].name %></small>
-                            </li>
-                            <% } %>
-                        </ul>
-                    </p>
-                </div>
-                <div class="card-footer">
-                    Type: <span class="badge badge-dark"><%= toursByRegion[j][k].type %></span>
-                </div>
+        <!-- <div class="card-deck mb-4"> -->
+        <% for(var k=0; k< toursByRegion[j].length; k++){ %>
+        <div class="card border-secondary mb-5">
+            <img src="<%= toursByRegion[j][k].places[0].image_path %>" class="card-img-top" alt="..." width="50px"
+                height="350px">
+            <div class="card-body">
+                <h5 class="card-title"><a
+                        href="/tours/<%= toursByRegion[j][k].t_id %>"><%= toursByRegion[j][k].name %></a></h5>
+                <p class=" card-text">
+                    <h6 class="card-subtitle mb-2">Places Covered:</h6>
+                    <ul>
+                        <% for(var i=0; i< toursByRegion[j][k].places.length; i++){ %>
+                        <li class="card-text">
+                            <small class="text-muted"><%= toursByRegion[j][k].places[i].name %></small>
+                        </li>
+                        <% } %>
+                    </ul>
+                </p>
             </div>
-            <% } %>
+            <div class="card-footer">
+                Type: <span class="badge badge-dark"><%= toursByRegion[j][k].type %></span>
+            </div>
         </div>
+        <% } %>
+        <!-- </div> -->
         <% } %>
     </div>
 
