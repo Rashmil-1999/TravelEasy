@@ -2,7 +2,7 @@ let tourModule = require("../models/tours");
 let middleware = require("../middleware/middleware");
 let utils = require("../../utils");
 
-module.exports = function(app) {
+module.exports = function(app, transporter, mailOptions) {
   app.get("/tours", async (req, res) => {
     let toursByRegion = await tourModule.getToursByRegion();
     console.log(toursByRegion[1].length);
@@ -42,6 +42,35 @@ module.exports = function(app) {
       user: req.user
     });
   });
+
+  app.get(
+    "/send-mail/:tourId/:tour",
+    middleware.isLoggedIn,
+    async (req, res) => {
+      mailOptions.to = `${req.user.email_id}`;
+      mailOptions.subject = `Itinerary for ${req.params.tour}`;
+      let filepath = await tourModule.getFilePath(req.params.tourId);
+      if (filepath) {
+        mailOptions.attachments = [
+          {
+            path: process.env.PATHdir + `${filepath.file_path}`
+          }
+        ];
+      } else {
+        res.send("Itinerary coming soon! We are sorry for your inconvinence.");
+      }
+      console.log(process.env.EMAILPASS);
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        console.log("Message %s sent: %s", info.messageId, info.response);
+      });
+
+      res.redirect(`/tours/${req.params.tourId}`);
+    }
+  );
+
   // =====================================
   // SEARCH ==============================
   // =====================================

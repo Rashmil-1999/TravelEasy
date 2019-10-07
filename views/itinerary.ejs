@@ -157,8 +157,11 @@
 </div>
 <% } %>
 <br>
-
-<button class="btnd"><i class="fa fa-download"></i> Send via Email</button>
+<div class="container">
+  <a href="/send-mail/<%= tour.t_id %>/<%= tour.name %>">
+    <button class="btnd"><i class="fa fa-download"></i>Send via Email</button>
+  </a>
+</div>
 
 <br /><br />
 <!--optional javascript and Jquery-->
