@@ -20,6 +20,7 @@ module.exports = function(app) {
       let tourTypesCount = tourTypes.length;
       let placeArrayData = utils.getPlacesFromTourLists(toursData);
       let dateArrayData = utils.getDatesFromTourLists(toursData);
+      console.log(dateArrayData);
       let pricesArrayData = utils.getPricesFromTourList(toursData);
       let descriptionArrayData = utils.getDescriptionFromTourList(toursData);
       // console.log(placeArrayData);
