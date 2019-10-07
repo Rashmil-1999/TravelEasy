@@ -1,6 +1,18 @@
 body {
-  background-color: rgb(212, 212, 199);
-  background-image: url("/Media/beanstalk.png");
+  background-color: rgb(47, 56, 56);
+  background-image: url("/Media/beanstalk.jpg");
+}
+
+.text {
+  color: rgb(143, 147, 150);
+}
+
+.navbar-brand {
+  float: left;
+  position: fixed;
+  left: 20;
+  top: 8;
+  display: inline;
 }
 
 .carousel-item {
@@ -245,14 +257,14 @@ body {
 h4.tour-video {
   text-align: center;
   font-weight: bold;
-  color: rgb(252, 137, 156);
+  color: rgb(243, 239, 239);
   font-size: 30px;
 }
 
 h5.tour-video {
   text-align: center;
   font-weight: bold;
-  color: rgb(252, 124, 145);
+  color: rgb(247, 241, 242);
   font-size: 20px;
 }
 
@@ -350,12 +362,10 @@ p.content {
 }
 
 .card-display {
-  background-color: grey;
+  background-color: rgb(190, 186, 186);
   text-align: center;
-}
-
-.line-break {
-  background-color: grey;
+  padding: 20px;
+  color: white;
 }
 
 /* Footer */
@@ -374,7 +384,9 @@ section .section-title {
 
 #footer {
   background: #007b5e !important;
-  width: 100%;
+  width: 1720px;
+  left: 0;
+  right: 0;
 }
 
 #footer h5 {

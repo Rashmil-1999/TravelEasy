@@ -5,3 +5,11 @@ body {
 .nav-hover:hover {
   color: white;
 }
+
+.navbar-brand {
+  float: left;
+  position: fixed;
+  left: 20;
+  top: 8;
+  display: inline;
+}

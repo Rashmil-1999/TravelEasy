@@ -28,7 +28,8 @@ module.exports = function(app) {
     let description = utils.convertToArray(tour[0].description);
     console.log(tour[0].t_id);
     let file_path = await tourModule.getFilePath(tour[0].t_id);
-    // console.log(file_path.file_path);
+    /*console.log(file_path.file_path);*/
+
     res.render("itinerary", {
       tour: tour[0],
       itinerary: itinerary,

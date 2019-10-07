@@ -3,6 +3,14 @@
   top: 56px;
 } */
 
+.navbar-brand {
+  float: left;
+  position: fixed;
+  left: 20;
+  top: 8;
+  display: inline;
+}
+
 .sun-animation {
   top: 25px;
   -moz-animation: spin 8s infinite ease-in-out;
@@ -35,15 +43,14 @@
   left: 50px;
 }
 
-nav > .nav.nav-tabs {
+nav>.nav.nav-tabs {
   border: none;
   color: #fff;
   background: #272e38;
   border-radius: 0;
 }
 
-nav > div a.nav-item.nav-link,
-nav > div a.nav-item.nav-link.active {
+nav>div a.nav-item.nav-link, nav>div a.nav-item.nav-link.active {
   border: none;
   padding: 18px 25px;
   color: #fff;
@@ -51,7 +58,7 @@ nav > div a.nav-item.nav-link.active {
   border-radius: 0;
 }
 
-nav > div a.nav-item.nav-link.active:after {
+nav>div a.nav-item.nav-link.active:after {
   content: "";
   position: relative;
   bottom: -60px;
@@ -69,8 +76,7 @@ nav > div a.nav-item.nav-link.active:after {
   padding: 30px 25px;
 }
 
-nav > div a.nav-item.nav-link:hover,
-nav > div a.nav-item.nav-link:focus {
+nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
   border: none;
   background: #b2e6f3;
   color: rgb(241, 13, 13);
@@ -81,7 +87,6 @@ nav > div a.nav-item.nav-link:focus {
 /*footer*/
 
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-
 section .section-title {
   text-align: center;
   color: #007b5e;
@@ -125,8 +130,7 @@ section .section-title {
   margin-top: -10px;
 }
 
-#footer ul.social li a,
-#footer ul.quick-links li a {
+#footer ul.social li a, #footer ul.quick-links li a {
   color: #ffffff;
 }
 

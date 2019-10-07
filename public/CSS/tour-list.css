@@ -2,6 +2,14 @@
   background-color: rgb(253, 253, 105);
 }
 
+.navbar-brand {
+  float: left;
+  position: fixed;
+  left: 20;
+  top: 8;
+  display: inline;
+}
+
 /*footer*/
 
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
