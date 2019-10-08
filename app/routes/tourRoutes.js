@@ -77,12 +77,43 @@ module.exports = function(app, transporter, mailOptions) {
   app.post("/search", async (req, res) => {
     let search = req.body.search;
     let results = await tourModule.search(search);
+    let dateArrayData = utils.getDatesFromTourLists(results);
+    let descriptionArrayData = utils.getDescriptionFromTourList(results);
     // let date = new Date(results[0].dates[0].start_date);
     // console.log(date.toDateString());
     res.render("results", {
       results: results,
-      keyword: search,
-      user: req.user
+      user: req.user,
+      datesArray: dateArrayData,
+      descriptionArray: descriptionArrayData
+    });
+  });
+
+  app.post("/filter-by-dates", async (req, res) => {
+    let dateField1 = req.body.datefield1;
+    let dateField2 = req.body.datefield2;
+    // console.log(dateField1, dateField2);
+    let DateArray = [];
+    let descriptionArrayData = [];
+    let dateArrayData = [];
+    if (dateField1 === dateField2) {
+      DateArray.push(dateField1);
+    } else {
+      DateArray.push(dateField1);
+      DateArray.push(dateField2);
+    }
+    console.log(DateArray);
+    let result_tours = await tourModule.getToursBydates(DateArray);
+    if (result_tours !== "No Results") {
+      dateArrayData = utils.getDatesFromTourLists(result_tours);
+      descriptionArrayData = utils.getDescriptionFromTourList(result_tours);
+    }
+    console.log(result_tours);
+    res.render("results", {
+      results: result_tours,
+      user: req.user,
+      datesArray: dateArrayData,
+      descriptionArray: descriptionArrayData
     });
   });
 

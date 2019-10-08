@@ -61,39 +61,80 @@
 <div class="main">
     <div id="first"></div>
     <div id="second">
-<div class="container-fluid">
-    <h3>Your search results for: <strong><%= keyword %></strong></h3>
-</div>
+        <div class="container">
+            <div class="card mb-4">
+                <div class="card-header">
+                    Select Travel Date range
+                </div>
+                <div class="card-body text-center">
+                    <form action="/filter-by-dates" method="POST">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="date" id="date1" name="datefield1"
+                                        placeholder="Select from travel date" class="form-control">
+                                </div>
+                                <div class="col">
+                                    <span class="badge badge-dark">And</span>
+                                </div>
+                                <div class="col">
+                                    <input type="date" name="datefield2" id="date2"
+                                        placeholder="Select till travel date" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container text-center">
+                            <input type="submit" value="Search" class="btn btn-secondary">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-
-
-
-<div class="card-container">
-        
-        
-<div class="container">
-    <% if(results !== "No Results"){ %>
-    <% for(var i = 0; i< results.length; i++){%>
-    <div class="card mb-3">
-        <img src="<%= results[i].places[0].image_path %>" class="card-img-top" alt="Image here" width="300"
-            height="400">
-        <div class="card-body">
-            <h5 class="card-title"> <a href="<%= "/tours/" + results[i].t_id %>"><%= results[i].name %></a></h5>
-            <p class="card-text"><%= results[i].description %></p>
-            <p class="card-text"><small class="text-muted"><%= results[i].region %></small></p>
+        <% if(results !== "No Results"){ %>
+        <div class="container-fluid">
+            <h3 class="text-center">Your search results</h3>
+        </div>
+        <div class="card-container">
+            <div class="container">
+                <% for(var i = 0; i< results.length; i++){%>
+                <div class="card mb-3">
+                    <img src="<%= results[i].places[0].image_path %>" class="card-img-top" alt="Image here" width="500"
+                        height="400">
+                    <div class="card-body">
+                        <h5 class="card-title"> <a href="<%= "/tours/" + results[i].t_id %>"><%= results[i].name %></a>
+                        </h5>
+                        <h6 class="card-subtitle mb-2">Tour Description:</h6>
+                        <ul>
+                            <% for(var j=0; j< descriptionArray[i].length; j++){ %>
+                            <li class="card-text">
+                                <small class="text-muted"><%= descriptionArray[i][j] %></small>
+                            </li>
+                            <% } %>
+                        </ul>
+                        <h6 class="card-subtitle mb-2">Tour Operational Dates:</h6>
+                        <ul>
+                            <% for(var m=0; m< datesArray[i].length; m++){ %>
+                            <li class="card-text">
+                                <small class="text-muted"><%= datesArray[i][m] %></small>
+                            </li>
+                            <% } %>
+                        </ul>
+                        <p class="card-text"><small class="text-muted"><span
+                                    class="badge badge-dark"><%= results[i].region %></span></small></p>
+                    </div>
+                </div>
+                <% } %>
+                <% }else{ %>
+                <div class="card mb-3">
+                    <div class="card-body text-center container">
+                        <h2>No tours! :(</h2>
+                    </div>
+                </div>
+                <% } %>
+            </div>
         </div>
     </div>
-    <% } %>
-    <% }else{ %>
-    <div class="card mb-3">
-        <div class="card-body text-center container">
-            <h2>No such tours! :(</h2>
-        </div>
-    </div>
-    <% } %>
-</div>
-</div>
-</div>
 </div>
 
 

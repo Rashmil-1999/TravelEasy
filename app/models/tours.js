@@ -69,7 +69,6 @@ tour.getToursByRegion = async () => {
   let regions = data_res[0].map(region => region.region);
   console.log(regions);
   let dataList = [];
-  let data = {};
   for (var i = 0; i < regions.length; i++) {
     let tourResults = await database.raw(
       `SELECT 
@@ -91,6 +90,29 @@ tour.getToursByRegion = async () => {
   }
   // console.log(dataList);
   return dataList;
+};
+
+tour.getToursBydates = async dates => {
+  if (dates.length === 2) {
+    let query = `
+      SELECT DISTINCT t_id
+      FROM dates
+      WHERE start_date BETWEEN '${dates[0]}' AND '${dates[1]}' 
+    `;
+    let data_res = await database.raw(query);
+    data_res = await tour.getToursByIds(data_res[0]);
+    return data_res;
+  }
+  let query = `
+    SELECT t_id
+    FROM dates
+    WHERE start_date = '${dates[0]}'
+  `;
+  console.log(query);
+  let data_res = await database.raw(query);
+  console.log(data_res);
+  data_res = await tour.getToursByIds(data_res[0]);
+  return data_res;
 };
 
 tour.getFilePath = async t_id => {
@@ -187,9 +209,9 @@ tour.search = async keyword => {
       ON p.pl_id = tp.pl_id
     JOIN tour t
       ON tp.t_id = t.t_id
-    WHERE p.name LIKE '${keyword}%' 
+    WHERE p.name LIKE '%${keyword}%' 
           OR
-          t.name LIKE '${keyword}%';
+          t.name LIKE '%${keyword}%';
     `);
   let response = await getToursByGivenIds(searchResponse);
   return response;

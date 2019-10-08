@@ -48,9 +48,40 @@
     </div>
 </nav>
 
-<div class="main">
 
-    <div style="height: 60px;"></div>
+<div class="main">
+    <div style="height: 64px;"></div>
+    <div class="">
+        <div class="card mb-4">
+            <div class="card-header">
+                Select Travel Date range
+            </div>
+            <div class="card-body text-center">
+                <form action="/filter-by-dates" method="POST">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <input type="date" id="date1" name="datefield1" placeholder="Select from travel date"
+                                    class="form-control">
+                            </div>
+                            <div class="col">
+                                <span class="badge badge-dark">And</span>
+                            </div>
+                            <div class="col">
+                                <input type="date" name="datefield2" id="date2" placeholder="Select till travel date"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container text-center">
+                        <input type="submit" value="Search" class="btn btn-secondary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <div class="container">
         <% for(var j=0; j< toursByRegion.length; j++){ %>
         <div class="container bg-light mr-1">
