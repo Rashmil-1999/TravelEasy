@@ -9,5 +9,5 @@ var knex = require("knex")({
     database: "tours"
   }
 });
-
+console.log(process.env.USER,process.env.PATHdir)
 module.exports = knex;

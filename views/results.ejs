@@ -50,19 +50,12 @@
     </div>
 </nav>
 
-
-
-<br>
-<br>
-<br>
-
-
+<div style="height:16px;"></div>
 
 <div class="main">
-    <div id="first"></div>
-    <div id="second">
+    <div class="first"></div>
         <div class="container">
-            <div class="card mb-4">
+            <div class="card mt-5 mb-4">
                 <div class="card-header">
                     Select Travel Date range
                 </div>
@@ -98,12 +91,11 @@
         <div class="card-container">
             <div class="container">
                 <% for(var i = 0; i< results.length; i++){%>
-                <div class="card mb-3">
+                <div class="<%= i===results.length-1?'card':'card mb-3' %>">
                     <img src="<%= results[i].places[0].image_path %>" class="card-img-top" alt="Image here" width="500"
                         height="400">
                     <div class="card-body">
-                        <h5 class="card-title"> <a href="<%= "/tours/" + results[i].t_id %>"><%= results[i].name %></a>
-                        </h5>
+                        <h5 class="card-title"><a href="<%= "/tours/" + results[i].t_id %>" ><%= results[i].name %></a></h5>
                         <h6 class="card-subtitle mb-2">Tour Description:</h6>
                         <ul>
                             <% for(var j=0; j< descriptionArray[i].length; j++){ %>
@@ -134,7 +126,6 @@
                 <% } %>
             </div>
         </div>
-    </div>
 </div>
 
 

@@ -1,6 +1,6 @@
 <% include partials/header %>
 <link rel="stylesheet" href="CSS/tour-list.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">
@@ -51,7 +51,7 @@
 
 <div class="main">
     <div style="height: 64px;"></div>
-    <div class="">
+    <div class="container">
         <div class="card mb-4">
             <div class="card-header">
                 Select Travel Date range
@@ -89,7 +89,7 @@
         </div>
         <!-- <div class="card-deck mb-4"> -->
         <% for(var k=0; k< toursByRegion[j].length; k++){ %>
-        <div class="card border-secondary mb-5">
+        <div class="<%= (k===toursByRegion[j].length-1 && j===toursByRegion.length -1)?'card border-secondary':'card border-secondary mb-5' %>">
             <img src="<%= toursByRegion[j][k].places[0].image_path %>" class="card-img-top" alt="..." width="50px"
                 height="350px">
             <div class="card-body">
@@ -118,7 +118,6 @@
 </div>
 
 <div>
-
     <section id="footer">
         <div class="container-fluid">
             <div class="row text-center text-xs-center text-sm-left text-md-left">

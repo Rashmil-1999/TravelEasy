@@ -2,3 +2,4 @@ node_modules
 .vscode
 WD
 .env
+.DS_Store

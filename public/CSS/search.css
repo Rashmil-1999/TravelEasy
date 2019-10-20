@@ -1,32 +1,41 @@
 .navbar-brand {
-    float: left;
-    position: fixed;
-    left: 20;
-    top: 8;
-    display: inline;
+  float: left;
+  position: fixed;
+  left: 20;
+  top: 8;
+  display: inline;
 }
 
 .card-container {
-    width: 575;
-    height: 500;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    top: 100px;
-    opacity: 1;
+  width: 700;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  top: 100px;
+  opacity: 1;
 }
 
-div#first {
-    background-image: url("/Media/bg7.jpg");
-    opacity: 0.5;
-    width: 1520;
-    height: 1024;
+.first {
+  position: absolute;
+  background: url("/Media/bg7.jpg") center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.5;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
 }
 
-div#second {
-    position: absolute;
-    width: 1520;
-    height: 1024;
-    left: 0;
-    top: 70;
+.main {
+  position: relative;
+  z-index: 1;
+  /* width: 1520;
+  height: 1024; */
+  /* left: 0; */
+  /* top: 70; */
 }

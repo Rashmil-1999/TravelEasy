@@ -1,14 +1,17 @@
 // app/models/tours.js
 // load the dependencies
-// defining our schema for the tour model
-// var conn = require("./mysqlConn");
+
+//create the database connection instance
 var database = require("./knexClient");
 
+// defining our schema for the tour model
 let tour = {};
 
+//function to get all the tours with the added data
 tour.getAllTours = async () => {
   try {
     let tours = await getTours();
+    //append the additional data need
     tours = await appendAdditionalData(tours);
     return tours;
   } catch (err) {
@@ -16,6 +19,7 @@ tour.getAllTours = async () => {
   }
 };
 
+//function to get tour by a specific id
 tour.getTour = async id => {
   try {
     let tour = await getTourById(id);
@@ -27,6 +31,7 @@ tour.getTour = async id => {
   }
 };
 
+//to get the list of all places ordered by name
 tour.getAllPlaces = async () => {
   const data = await database.raw(
     `SELECT 
@@ -38,6 +43,7 @@ tour.getAllPlaces = async () => {
   return data[0];
 };
 
+//to get the list of all the tour types in the database
 tour.getAllTourTypes = async () => {
   const data = await database.raw(`
     SELECT * FROM tour_type;
@@ -45,6 +51,7 @@ tour.getAllTourTypes = async () => {
   return data[0];
 };
 
+//list of all the tour ids 't_id'
 tour.getAllTourIds = async () => {
   const data = await database.raw(`
     SELECT t_id,name
@@ -53,21 +60,26 @@ tour.getAllTourIds = async () => {
   return data[0];
 };
 
+//to get the list of tours by the given ids
 tour.getToursByIds = async ids => {
+  //getToursByGivenIds requires a 2D array 
+  //hence we convert it to 2D by pushing the incoming array into our new array 
   let newids = [];
   newids.push(ids);
   const data = await getToursByGivenIds(newids);
   return data;
 };
 
+//to get the list of tours on the basis of region
 tour.getToursByRegion = async () => {
+  //collect the distinct values of region in the tour database
   let data_res = await database.raw(`
   SELECT DISTINCT region
   FROM tour
   `);
-
+  //convert to array of regions
   let regions = data_res[0].map(region => region.region);
-  console.log(regions);
+  // console.log(regions);
   let dataList = [];
   for (var i = 0; i < regions.length; i++) {
     let tourResults = await database.raw(
