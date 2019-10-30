@@ -5,16 +5,16 @@ var express = require("express");
 var app = express();
 var passport = require("passport");
 var flash = require("connect-flash");
-var bodyParser = require("body-parser");
+var bodyParser = require("body-parser"); //to extract form data from the body
 // var cookieParser = require("cookie-parser");
-var session = require("express-session");
-var logger = require("morgan");
-var fileUpload = require("express-fileupload");
+var session = require("express-session"); //to manage different sessions
+var logger = require("morgan"); //for debugging and displaying on the console
+var fileUpload = require("express-fileupload"); //to handle file uploads
 var env = require("dotenv");
 let nodeMailer = require("nodemailer");
 // var utils = require("./utils");
 env.config();
-
+console.log(process.env.EMAILPASS);
 //configure the Email transporter
 let transporter = nodeMailer.createTransport({
   host: "smtp.gmail.com",
@@ -27,7 +27,7 @@ let transporter = nodeMailer.createTransport({
 });
 
 let mailOptions = {
-  from: '"TravelEasy" <damonsalvatore833@gmail.com>', // sender address
+  from: '"TravelEasy" <djsanghvinoreply@gmail.com>', // sender address
   to: "", // list of receivers
   subject: "", // Subject line
   text: "Here is the Itinerary you requested for.", // plain text body
