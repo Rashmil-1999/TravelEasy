@@ -23,6 +23,8 @@ It was built by 3 developers
 
 > Rashmil Panchani (Back-end)
 > [github.com/Rashmil-1999](https://github.com/Rashmil-1999)
+
 > Priyal Patel (Front-end)
 > [github.com/priyal-0411](https://github.com/priyal-0411)
+
 > Richa Sheth (Front-end and Data aggregation)
