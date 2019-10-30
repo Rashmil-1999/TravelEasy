@@ -1,6 +1,6 @@
 # TravelEasy
 
-##### Web Design mini-project for my 5<sup>th</sup>
+##### Web Design mini-project for my 5<sup>th</sup> semester in Computer engineering
 
 ## Build instructions
 
