@@ -14,20 +14,20 @@ var env = require("dotenv");
 let nodeMailer = require("nodemailer");
 // var utils = require("./utils");
 env.config();
-console.log(process.env.EMAILPASS);
+// console.log(process.env.EMAILPASS);
 //configure the Email transporter
 let transporter = nodeMailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
   auth: {
-    user: "djsanghvinoreply@gmail.com",
+    user: process.env.EmailID,
     pass: process.env.EMAILPASS
   }
 });
 
 let mailOptions = {
-  from: '"TravelEasy" <djsanghvinoreply@gmail.com>', // sender address
+  from: `"TravelEasy" <${process.env.EmailID}>`, // sender address
   to: "", // list of receivers
   subject: "", // Subject line
   text: "Here is the Itinerary you requested for.", // plain text body
